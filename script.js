@@ -63,6 +63,54 @@ const playersData = [
             { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "LT4" }
         ]
     },
+    {
+        name: "StrikeFlax",
+        points: 67,
+        region: "AS",
+        regionFull: "Asia",
+        tiers: [
+            { icon: "https://i.postimg.cc/qM3XBvN6/nethop.png", label: "HT4" },
+            { icon: "https://i.postimg.cc/xdK4XPqk/axe.png", label: "?" },
+            { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "?" },
+            { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "?" },
+            { icon: "https://i.postimg.cc/zD9KQY0P/uhc.png", label: "?" },
+            { icon: "https://i.postimg.cc/cL1RRMDy/smp.png", label: "?" },
+            { icon: "https://i.postimg.cc/nLYDjsJS/638965736295609752.png", label: "LT4" },
+            { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "LT4" }
+        ]
+    },
+    {
+        name: "Hasan7me12",
+        points: 66,
+        region: "AS",
+        regionFull: "ALT3a",
+        tiers: [
+            { icon: "https://i.postimg.cc/qM3XBvN6/nethop.png", label: "?" },
+            { icon: "https://i.postimg.cc/xdK4XPqk/axe.png", label: "?" },
+            { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "?" },
+            { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "?" },
+            { icon: "https://i.postimg.cc/zD9KQY0P/uhc.png", label: "?" },
+            { icon: "https://i.postimg.cc/cL1RRMDy/smp.png", label: "?" },
+            { icon: "https://i.postimg.cc/nLYDjsJS/638965736295609752.png", label: "HT4" },
+            { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "LT" }
+        ]
+    },
+    {
+        name: "Avengedblack",
+        points: 63,
+        region: "AS",
+        regionFull: "Asia",
+        tiers: [
+            { icon: "https://i.postimg.cc/qM3XBvN6/nethop.png", label: "?" },
+            { icon: "https://i.postimg.cc/xdK4XPqk/axe.png", label: "?" },
+            { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "LT4" },
+            { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "?" },
+            { icon: "https://i.postimg.cc/zD9KQY0P/uhc.png", label: "?" },
+            { icon: "https://i.postimg.cc/cL1RRMDy/smp.png", label: "?" },
+            { icon: "https://i.postimg.cc/nLYDjsJS/638965736295609752.png", label: "LT4" },
+            { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "HT4" }
+        ]
+    },
 ];
 
 function renderTable(dataToRender = playersData) {
