@@ -3,192 +3,210 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vortex Tier</title>
+    <title>Vortex Tier | Official Leaderboard</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
-        body { background-color: #07090e; color: #fff; }
+        :root {
+            --bg-color: #05070b;
+            --card-bg: #0d1117;
+            --card-hover: #161b22;
+            --border-color: #21262d;
+            --accent-color: #facc15;
+            --text-main: #f0f6fc;
+            --text-muted: #8b949e;
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', 'Segoe UI', sans-serif; }
+        body { background-color: var(--bg-color); color: var(--text-main); overflow-x: hidden; }
+
+        /* --- Navigation Bar --- */
         nav { 
             display: flex; justify-content: space-between; align-items: center; 
-            padding: 20px 5%; background: rgba(13, 17, 23, 0.85); 
-            backdrop-filter: blur(10px); position: absolute; top: 0; width: 100%; 
-            z-index: 2000; border-bottom: 1px solid rgba(48, 54, 61, 0.4);
+            padding: 18px 6%; background: rgba(5, 7, 11, 0.85); 
+            backdrop-filter: blur(12px); position: fixed; top: 0; width: 100%; 
+            z-index: 2000; border-bottom: 1px solid rgba(33, 38, 45, 0.6);
         }
-        nav .logo h2 { color: #facc15; font-weight: 800; }
-        nav .menu a { color: #c9d1d9; text-decoration: none; margin-left: 25px; cursor: pointer; font-weight: 600; }
-        nav .menu a:hover { color: #facc15; }
+        nav .logo h2 { color: var(--accent-color); font-weight: 900; font-size: 1.4rem; letter-spacing: 0.5px; }
+        nav .menu { display: flex; align-items: center; gap: 30px; }
+        nav .menu a { color: var(--text-muted); text-decoration: none; cursor: pointer; font-weight: 600; font-size: 0.95rem; transition: color 0.2s ease; }
+        nav .menu a:hover { color: var(--accent-color); }
 
+        /* --- Landing Page --- */
         #landing-page {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 20%, #1a1a3a 0%, #07090e 70%);
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: radial-gradient(circle at 50% 30%, #151934 0%, #05070b 75%);
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             text-align: center; padding: 20px; z-index: 1000;
         }
         .badge { 
-            background: rgba(26, 32, 44, 0.8); color: #818cf8; padding: 6px 16px; border-radius: 30px; 
-            margin-bottom: 25px; border: 1px solid rgba(99, 102, 241, 0.3); font-size: 0.8rem; 
+            background: rgba(99, 102, 241, 0.1); color: #818cf8; padding: 6px 18px; border-radius: 30px; 
+            margin-bottom: 25px; border: 1px solid rgba(99, 102, 241, 0.3); font-size: 0.85rem; 
             display: inline-flex; align-items: center; gap: 8px; font-weight: 600;
         }
-        .status-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; }
+        .status-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; box-shadow: 0 0 10px #22c55e; }
         
-        h1 { font-size: 3.5rem; line-height: 1.15; margin-bottom: 20px; color: #fff; font-weight: 800; }
-        .highlight { color: #facc15; } 
-        p { color: #8b949e; max-width: 550px; margin-bottom: 35px; font-size: 1.05rem; line-height: 1.6; }
+        h1 { font-size: 3.8rem; line-height: 1.15; margin-bottom: 20px; font-weight: 800; }
+        .highlight { color: var(--accent-color); text-shadow: 0 0 25px rgba(250, 204, 21, 0.3); } 
+        p { color: var(--text-muted); max-width: 600px; margin-bottom: 35px; font-size: 1.1rem; line-height: 1.6; }
 
         .btn-group { display: flex; gap: 15px; }
-        .btn { padding: 14px 28px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 0.95rem; }
-        .btn-primary { background: #6366f1; color: white; }
-        .btn-secondary { background: #161b22; color: white; border: 1px solid #30363d; }
+        .btn { padding: 14px 30px; border: none; border-radius: 12px; cursor: pointer; font-weight: 700; font-size: 1rem; transition: transform 0.2s, box-shadow 0.2s; }
+        .btn-primary { background: #6366f1; color: white; box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4); }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(99, 102, 241, 0.6); }
+        .btn-secondary { background: var(--card-bg); color: white; border: 1px solid var(--border-color); }
+        .btn-secondary:hover { background: var(--card-hover); }
 
-        #main-content { display: none; padding: 30px 20px; max-width: 1250px; margin: 0 auto; }
+        /* --- Main Content / Leaderboard --- */
+        #main-content { display: none; padding: 110px 5% 50px 5%; max-width: 1350px; margin: 0 auto; min-height: 100vh; }
         
-        header { 
-            background: #11161d; padding: 24px 30px; border-radius: 14px; margin-bottom: 25px; 
-            display: flex; justify-content: space-between; align-items: center; border: 1px solid #21262d;
+        .header-panel { 
+            background: var(--card-bg); padding: 25px 35px; border-radius: 16px; margin-bottom: 30px; 
+            display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); flex-wrap: wrap; gap: 20px;
         }
-        header h1 { font-size: 1.8rem; margin: 0; color: #f0f6fc; }
+        .header-panel h1 { font-size: 1.8rem; margin: 0; }
+        
+        .search-box {
+            padding: 10px 16px; border-radius: 10px; border: 1px solid var(--border-color); 
+            background: var(--bg-color); color: white; outline: none; font-size: 0.95rem; width: 260px;
+            transition: border-color 0.2s;
+        }
+        .search-box:focus { border-color: var(--accent-color); }
 
-        /* mctiers হুবহু কার্ড স্টাইল টেবিল */
-        .overall-table { 
-            width: 100%; border-collapse: separate; border-spacing: 0 10px; 
-        }
+        /* --- Table Design --- *//* mctiers style card rows */
+        .overall-table { width: 100%; border-collapse: separate; border-spacing: 0 12px; }
         .overall-table th { 
-            color: #8b949e; font-size: 0.8rem; text-transform: uppercase; 
-            padding: 0 18px 10px 18px; text-align: left; letter-spacing: 0.8px; 
+            color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; 
+            padding: 0 20px 8px 20px; text-align: left; letter-spacing: 1px; font-weight: 700;
         }
         
         .player-row-item { 
-            background: #11161d; 
-            cursor: pointer; 
-            transition: all 0.2s ease; 
-            border: 1px solid #21262d;
+            background: var(--card-bg); cursor: pointer; transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); 
+            border: 1px solid var(--border-color);
         }
         .player-row-item td { 
-            padding: 12px 18px; 
-            border-top: 1px solid #21262d; 
-            border-bottom: 1px solid #21262d; 
+            padding: 14px 20px; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); 
             vertical-align: middle; 
         }
-        .player-row-item td:first-child { 
-            border-left: 1px solid #21262d; 
-            border-top-left-radius: 10px; 
-            border-bottom-left-radius: 10px; 
-        }
-        .player-row-item td:last-child { 
-            border-right: 1px solid #21262d; 
-            border-top-right-radius: 10px; 
-            border-bottom-right-radius: 10px; 
-        }
-        .player-row-item:hover { background: #161b22; border-color: #30363d; }
+        .player-row-item td:first-child { border-left: 1px solid var(--border-color); border-top-left-radius: 12px; border-bottom-left-radius: 12px; }
+        .player-row-item td:last-child { border-right: 1px solid var(--border-color); border-top-right-radius: 12px; border-bottom-right-radius: 12px; }
+        .player-row-item:hover { background: var(--card-hover); border-color: #30363d; transform: scale(1.005); }
 
-        .rank-col { font-weight: 900; font-size: 1.25rem; width: 70px; font-style: italic; color: #8b949e; }
+        .rank-col { font-weight: 900; font-size: 1.3rem; width: 80px; font-style: italic; color: var(--text-muted); }
 
-        /* ১, ২, ৩ নম্বরের বিশেষ কালার ও গ্লো ইফেক্ট */
-        .row-rank-1 { background: linear-gradient(90deg, rgba(234, 179, 8, 0.12) 0%, #11161d 50%); border-color: rgba(234, 179, 8, 0.4); }
-        .row-rank-1 .rank-col { color: #facc15; }
+        /* Top 3 Special Shading & Glow */
+        .row-rank-1 { background: linear-gradient(90deg, rgba(234, 179, 8, 0.12) 0%, var(--card-bg) 60%); border-color: rgba(234, 179, 8, 0.4); }
+        .row-rank-1 .rank-col { color: #facc15; text-shadow: 0 0 12px rgba(250, 204, 21, 0.4); }
 
-        .row-rank-2 { background: linear-gradient(90deg, rgba(148, 163, 184, 0.12) 0%, #11161d 50%); border-color: rgba(148, 163, 184, 0.4); }
-        .row-rank-2 .rank-col { color: #cbd5e1; }
+        .row-rank-2 { background: linear-gradient(90deg, rgba(148, 163, 184, 0.12) 0%, var(--card-bg) 60%); border-color: rgba(148, 163, 184, 0.4); }
+        .row-rank-2 .rank-col { color: #cbd5e1; text-shadow: 0 0 12px rgba(203, 213, 225, 0.3); }
 
-        .row-rank-3 { background: linear-gradient(90deg, rgba(249, 115, 22, 0.12) 0%, #11161d 50%); border-color: rgba(249, 115, 22, 0.4); }
-        .row-rank-3 .rank-col { color: #fb923c; }
+        .row-rank-3 { background: linear-gradient(90deg, rgba(249, 115, 22, 0.12) 0%, var(--card-bg) 60%); border-color: rgba(249, 115, 22, 0.4); }
+        .row-rank-3 .rank-col { color: #fb923c; text-shadow: 0 0 12px rgba(251, 146, 60, 0.3); }
 
-        .player-container { display: flex; align-items: center; gap: 14px; }
-        .player-details { display: flex; flex-direction: column; gap: 3px; }
+        .player-container { display: flex; align-items: center; gap: 16px; }
+        .player-details { display: flex; flex-direction: column; gap: 4px; }
+        .player-name { font-weight: 800; color: var(--text-main); font-size: 1.1rem; }
         
-        /* ছবি অনুযায়ী প্লেয়ারের নাম বোল্ড ও উজ্জ্বল */
-        .player-name { font-weight: 800; color: #f0f6fc; font-size: 1.05rem; }
-        
-        /* র‍্যাংক, ডায়মন্ড আইকন এবং পয়েন্ট বোল্ড স্টাইল */
-        .rank-desc { font-size: 0.78rem; color: #94a3b8; display: flex; align-items: center; gap: 6px; font-weight: 700; }
-        .player-skin-full { width: 32px; height: auto; object-fit: contain; }
+        .rank-desc { font-size: 0.8rem; color: #94a3b8; display: flex; align-items: center; gap: 6px; font-weight: 700; }
+        .player-skin-full { width: 36px; height: auto; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
 
-        /* রিজন ব্যাজ (বোল্ড ও পরিষ্কার) */
         .region-badge { 
-            padding: 4px 10px; border-radius: 6px; font-size: 0.72rem; font-weight: 900; border: 1px solid; letter-spacing: 0.8px; display: inline-block;
+            padding: 5px 12px; border-radius: 6px; font-size: 0.75rem; font-weight: 900; border: 1px solid; letter-spacing: 0.8px; display: inline-block;
         }
-        .region-na { background: rgba(239, 68, 68, 0.15); color: #f87171; border-color: rgba(239, 68, 68, 0.35); }
-        .region-eu { background: rgba(34, 197, 94, 0.15); color: #4ade80; border-color: rgba(34, 197, 94, 0.35); }
-        .region-me { background: rgba(168, 85, 247, 0.15); color: #c084fc; border-color: rgba(168, 85, 247, 0.35); }
+        .region-na { background: rgba(239, 68, 68, 0.12); color: #f87171; border-color: rgba(239, 68, 68, 0.3); }
+        .region-eu { background: rgba(34, 197, 94, 0.12); color: #4ade80; border-color: rgba(34, 197, 94, 0.3); }
+        .region-me { background: rgba(168, 85, 247, 0.12); color: #c084fc; border-color: rgba(168, 85, 247, 0.3); }
 
-        /* গেম মোড টিয়ার আইকন ও লেবেল */
-        .tiers-container { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+        .tiers-container { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
         .tier-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
-        .tier-icon { width: 20px; height: 20px; object-fit: contain; }
-        .tier-label { font-size: 0.65rem; font-weight: 800; color: #facc15; }
+        .tier-icon { width: 22px; height: 22px; object-fit: contain; }
+        .tier-label { font-size: 0.68rem; font-weight: 800; color: var(--accent-color); }
         .tier-empty { font-size: 0.75rem; color: #484f58; font-weight: bold; }
 
-        /* --- Player Modal Styles --- */
+        /* --- Professional Modal --- */
         #playerModal {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(5px); z-index: 3000;
+            background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(8px); z-index: 3000;
             justify-content: center; align-items: center;
         }
         .modal-content {
-            background: #11161d; width: 90%; max-width: 400px; border-radius: 18px;
-            padding: 30px 24px; position: relative; border: 1px solid #30363d; text-align: center;
+            background: var(--card-bg); width: 90%; max-width: 420px; border-radius: 20px;
+            padding: 35px 25px; position: relative; border: 1px solid var(--border-color); text-align: center;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6); animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        @keyframes modalPop {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
         .close-btn {
-            position: absolute; top: 18px; right: 18px; background: #161b22; border: 1px solid #30363d;
-            color: #8b949e; width: 32px; height: 32px; border-radius: 50%; cursor: pointer;
-            display: flex; align-items: center; justify-content: center;
+            position: absolute; top: 18px; right: 18px; background: var(--bg-color); border: 1px solid var(--border-color);
+            color: var(--text-muted); width: 34px; height: 34px; border-radius: 50%; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; font-weight: bold; transition: background 0.2s;
         }
+        .close-btn:hover { background: var(--card-hover); color: white; }
+        
         .modal-avatar-box {
-            width: 85px; height: 85px; background: #161b22; border-radius: 50%; margin: 0 auto 15px;
-            display: flex; align-items: center; justify-content: center; border: 2px solid #30363d; overflow: hidden;
+            width: 90px; height: 90px; background: var(--bg-color); border-radius: 50%; margin: 0 auto 15px;
+            display: flex; align-items: center; justify-content: center; border: 2px solid var(--border-color); overflow: hidden;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
         }
-        .modal-avatar-box img { width: 55px; height: auto; }
-        .modal-player-name { font-size: 1.6rem; font-weight: 800; color: #fff; margin-bottom: 6px; }
+        .modal-avatar-box img { width: 60px; height: auto; }
+        .modal-player-name { font-size: 1.7rem; font-weight: 800; color: #fff; margin-bottom: 6px; }
         .modal-rank-badge {
-            display: inline-flex; align-items: center; gap: 6px; background: #161b22; border: 1px solid #30363d;
-            padding: 6px 16px; border-radius: 20px; color: #fbbf24; font-weight: bold; font-size: 0.85rem; margin-bottom: 6px;
+            display: inline-flex; align-items: center; gap: 6px; background: var(--bg-color); border: 1px solid var(--border-color);
+            padding: 6px 18px; border-radius: 20px; color: var(--accent-color); font-weight: bold; font-size: 0.9rem; margin-bottom: 8px;
         }
-        .modal-region { color: #8b949e; font-size: 0.85rem; margin-bottom: 16px; font-weight: 600; }
+        .modal-region { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 18px; font-weight: 600; }
+        
         .namemc-link {
-            display: inline-flex; align-items: center; gap: 6px; background: #161b22; color: #c9d1d9;
-            padding: 6px 14px; border-radius: 8px; font-size: 0.8rem; text-decoration: none; border: 1px solid #30363d; margin-bottom: 22px;
+            display: inline-flex; align-items: center; gap: 6px; background: var(--bg-color); color: var(--text-main);
+            padding: 8px 16px; border-radius: 8px; font-size: 0.85rem; text-decoration: none; border: 1px solid var(--border-color); margin-bottom: 24px; font-weight: 600; transition: border-color 0.2s;
         }
-        .modal-section-title { text-align: left; font-size: 0.75rem; color: #8b949e; text-transform: uppercase; margin-bottom: 8px; font-weight: 700; }
+        .namemc-link:hover { border-color: var(--accent-color); }
+
+        .modal-section-title { text-align: left; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px; font-weight: 800; letter-spacing: 0.5px; }
         .modal-position-box {
-            background: #07090e; border: 1px solid #21262d; padding: 12px 18px; border-radius: 10px;
+            background: var(--bg-color); border: 1px solid var(--border-color); padding: 12px 18px; border-radius: 12px;
             display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;
         }
-        .modal-pos-number { font-size: 1.3rem; font-weight: 800; color: #fff; }
-        .modal-pos-title { color: #fbbf24; font-weight: 700; font-size: 0.85rem; }
-        .modal-tiers-grid { background: #07090e; border: 1px solid #21262d; padding: 12px; border-radius: 10px; display: flex; justify-content: space-around; gap: 5px; flex-wrap: wrap; }
+        .modal-pos-number { font-size: 1.4rem; font-weight: 900; color: #fff; }
+        .modal-pos-title { color: var(--accent-color); font-weight: 700; font-size: 0.9rem; }
+        .modal-tiers-grid { background: var(--bg-color); border: 1px solid var(--border-color); padding: 14px; border-radius: 12px; display: flex; justify-content: space-around; gap: 8px; flex-wrap: wrap; }
     </style>
 </head>
 <body>
 
-<!-- ল্যান্ডিং পেজ -->
+<!-- Navigation -->
+<nav>
+    <div class="logo"><h2>VORTEX TIER</h2></div>
+    <div class="menu">
+        <a onclick="showSection('landing-page')">Home</a>
+        <a onclick="showSection('main-content')">Rankings</a>
+        <a href="https://discord.gg/CNnWfV99m8" target="_blank">Discord</a>
+    </div>
+</nav>
+
+<!-- Landing Page -->
 <div id="landing-page">
-    <nav>
-        <div class="logo"><h2>Vortex Tier</h2></div>
-        <div class="menu">
-            <a onclick="showSection('landing-page')">Home</a>
-            <a onclick="showSection('main-content')">Ranking</a>
-            <a href="https://discord.gg/CNnWfV99m8">Discord</a>
-        </div>
-    </nav>
     <div class="badge"><div class="status-dot"></div> Server Active ● LIVE</div>
     <h1>The <span class="highlight">#1 Cracked</span><br>& Premium Tierlist</h1>
-    <p>Vortex Tier is the best Minecraft PvP tier testing server with skilled testers, active leaderboards, fair rankings, and competitive gameplay.</p>
+    <p>Vortex Tier is the ultimate Minecraft PvP tier testing platform featuring skilled testers, accurate live leaderboards, and fierce competitive gameplay.</p>
     
     <div class="btn-group">
-        <button class="btn btn-primary" onclick="showWebsite()">⚡ View Tier List</button>
-        <button class="btn btn-secondary" onclick="window.location.href='https://discord.gg/CNnWfV99m8'">Join Discord</button>
+        <button class="btn btn-primary" onclick="showWebsite()">⚡ View Rankings</button>
+        <button class="btn btn-secondary" onclick="window.open('https://discord.gg/CNnWfV99m8', '_blank')">Join Discord</button>
     </div>
 </div>
 
-<!-- মেইন ওয়েবসাইট -->
+<!-- Main Leaderboard Page -->
 <div id="main-content">
-    <header>
-        <h1>Vortex Rankings</h1>
-        <div style="display:flex; gap:12px; align-items: center;">
-            <a href="https://discord.gg/CNnWfV99m8" style="background: #5865F2; color: white; padding: 9px 16px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.9rem;">Discord</a>
-            <input type="text" id="tierSearch" placeholder="Search player..." style="padding: 9px 14px; border-radius: 8px; border: 1px solid #30363d; background: #07090e; color: white; outline: none; font-size: 0.9rem;">
+    <div class="header-panel">
+        <h1>Global Leaderboard</h1>
+        <div style="display:flex; gap:14px; align-items: center;">
+            <a href="https://discord.gg/CNnWfV99m8" target="_blank" style="background: #5865F2; color: white; padding: 10px 18px; border-radius: 10px; text-decoration: none; font-weight: 700; font-size: 0.9rem; box-shadow: 0 4px 15px rgba(88, 101, 242, 0.4);">Discord</a>
+            <input type="text" id="tierSearch" class="search-box" placeholder="🔍 Search player..." onkeyup="filterPlayers()">
         </div>
-    </header>
+    </div>
 
     <div style="overflow-x: auto;">
         <table class="overall-table">
@@ -197,37 +215,37 @@
                     <th>#</th>
                     <th>Player</th>
                     <th>Region</th>
-                    <th>Tiers</th>
+                    <th>Game Modes / Tiers</th>
                 </tr>
             </thead>
             <tbody id="playerTable">
-                <!-- ডায়নামিক ডাটা এখানে লোড হবে -->
+                <!-- Data injected dynamically -->
             </tbody>
         </table>
     </div>
 </div>
 
-<!-- Player Details Modal -->
+<!-- Player Detail Modal -->
 <div id="playerModal">
     <div class="modal-content">
         <button class="close-btn" onclick="closePlayerModal()">✕</button>
         <div class="modal-avatar-box">
-            <img id="modalSkinImg" src="" alt="Player Skin">
+            <img id="modalSkinImg" src="" alt="Skin">
         </div>
-        <div class="modal-player-name" id="modalPlayerName">PlayerName</div>
+        <div class="modal-player-name" id="modalPlayerName">Name</div>
         <div>
-            <span class="modal-rank-badge">👑 <span id="modalRankText">Combat Master</span></span>
+            <span class="modal-rank-badge">👑 <span id="modalRankText">Master</span></span>
         </div>
-        <div class="modal-region" id="modalRegionText">Asia</div>
-        <a id="modalNameMCLink" href="#" target="_blank" class="namemc-link">🔗 NameMC</a>
+        <div class="modal-region" id="modalRegionText">Region</div>
+        <a id="modalNameMCLink" href="#" target="_blank" class="namemc-link">🔗 View on NameMC</a>
 
-        <div class="modal-section-title">Position</div>
+        <div class="modal-section-title">Standing</div>
         <div class="modal-position-box">
             <span class="modal-pos-number" id="modalPositionNum">1.</span>
-            <span class="modal-pos-title">🏆 OVERALL (<span id="modalPointsText">0 points</span>)</span>
+            <span class="modal-pos-title">🏆 OVERALL (<span id="modalPointsText">0 pts</span>)</span>
         </div>
 
-        <div class="modal-section-title">Tiers</div>
+        <div class="modal-section-title">Detailed Tiers</div>
         <div class="modal-tiers-grid" id="modalTiersContainer"></div>
     </div>
 </div>
@@ -300,13 +318,12 @@
         }
     ];
 
-    function renderTable() {
-        playersData.sort((a, b) => b.points - a.points);
-
+    function renderTable(dataToRender = playersData) {
+        dataToRender.sort((a, b) => b.points - a.points);
         const tbody = document.getElementById('playerTable');
         tbody.innerHTML = "";
 
-        playersData.forEach((player, index) => {
+        dataToRender.forEach((player, index) => {
             let rankNum = index + 1;
             let computedRank = "";
             let rowClass = "player-row-item";
@@ -339,7 +356,7 @@
 
             let row = document.createElement('tr');
             row.className = rowClass;
-            row.onclick = () => openPlayerModal(index);
+            row.onclick = () => openPlayerModal(playersData.indexOf(player));
 
             row.innerHTML = `
                 <td class="rank-col">${rankNum}.</td>
@@ -361,6 +378,12 @@
             `;
             tbody.appendChild(row);
         });
+    }
+
+    function filterPlayers() {
+        let query = document.getElementById('tierSearch').value.toLowerCase();
+        let filtered = playersData.filter(p => p.name.toLowerCase().includes(query));
+        renderTable(filtered);
     }
 
     function showWebsite() {
