@@ -58,42 +58,19 @@
         .overall-table { width: 100%; background: #161b22; border-radius: 8px; border-collapse: collapse; }
         .overall-table th, .overall-table td { padding: 12px; border-bottom: 1px solid #21262d; text-align: left; }
 
+        /* Clickable Table Row */
+        .player-row-item { cursor: pointer; transition: background 0.2s; }
+        .player-row-item:hover { background: #1c2128; }
+
         .player-container { display: flex; align-items: center; gap: 12px; }
         .player-details { display: flex; flex-direction: column; }
         .player-name { font-weight: bold; color: #f0f6fc; font-size: 1rem; }
         .rank-desc { font-size: 0.8rem; color: #8b949e; }
 
-        .skin-wrapper {
-            position: relative;
-            width: 42px;
-            height: 42px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 12px;
-        }
-
-        .skin-bg {
-            position: absolute;
-            width: 42px;
-            height: 42px;
-            background-color: #2f363d;
-            border-radius: 4px;
-            z-index: 1;
-        }
-
         .player-skin-full {
             width: 41px;
             height: auto;
-            z-index: 2;
-            position: relative;
             object-fit: contain;
-        }
-
-        .player-row-item .player-container { 
-            display: flex; 
-            align-items: center; 
-            gap: 12px; 
         }
 
         .region-badge { 
@@ -111,25 +88,98 @@
         .tier-item { display: flex; flex-direction: column; align-items: center; gap: 2px; }
         .tier-icon { width: 22px; height: 22px; object-fit: contain; }
         .tier-label { font-size: 0.7rem; font-weight: bold; }
-        
-        .player-head {
-            width: 24px;
-            height: 24px;
-            background-color: #30363d;
-            border: 2px solid #444c56;
-            border-radius: 4px;
+
+        /* --- Player Modal / GUI Popup Styles --- */
+        #playerModal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background: #161b22;
+            width: 90%;
+            max-width: 420px;
+            border-radius: 16px;
+            padding: 24px;
             position: relative;
-            flex-shrink: 0;
+            border: 1px solid #30363d;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            text-align: center;
+            animation: modalPop 0.3s ease;
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes modalPop {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #21262d;
+            border: none;
+            color: #8b949e;
+            width: 32px; height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 16px;
+            display: flex; align-items: center; justify-content: center;
+            transition: 0.2s;
+        }
+        .close-btn:hover { background: #30363d; color: #fff; }
+        
+        .modal-avatar-box {
+            width: 80px; height: 80px;
+            background: #21262d;
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex; align-items: center; justify-content: center;
+            border: 2px solid #30363d;
+            overflow: hidden;
+        }
+        .modal-avatar-box img { width: 60px; height: auto; }
+        .modal-player-name { font-size: 1.5rem; font-weight: bold; color: #fff; margin-bottom: 8px; }
+        
+        .modal-rank-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: #21262d; border: 1px solid #30363d;
+            padding: 6px 14px; border-radius: 20px;
+            color: #fbbf24; font-weight: bold; font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+        .modal-region { color: #8b949e; font-size: 0.9rem; margin-bottom: 15px; }
+        
+        .namemc-link {
+            display: inline-block;
+            background: #21262d; color: #c9d1d9;
+            padding: 5px 12px; border-radius: 6px;
+            font-size: 0.8rem; text-decoration: none;
+            border: 1px solid #30363d; margin-bottom: 20px;
+            transition: 0.2s;
+        }
+        .namemc-link:hover { background: #30363d; }
 
-        .page-section.active {
-            display: block;
-            animation: fadeIn 0.4s ease-out;
+        .modal-section-title {
+            text-align: left; font-size: 0.8rem; color: #8b949e;
+            text-transform: uppercase; letter-spacing: 0.5px;
+            margin-bottom: 8px; font-weight: bold;
+        }
+        .modal-position-box {
+            background: #0b0e14; border: 1px solid #21262d;
+            padding: 12px 15px; border-radius: 8px;
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .modal-pos-number { font-size: 1.2rem; font-weight: bold; color: #fff; }
+        .modal-pos-title { color: #fbbf24; font-weight: bold; font-size: 0.9rem; }
+
+        .modal-tiers-grid {
+            background: #0b0e14; border: 1px solid #21262d;
+            padding: 15px; border-radius: 8px;
+            display: flex; justify-content: space-around; gap: 5px;
         }
 
         @media (max-width: 650px) {
@@ -165,7 +215,7 @@
         <h1>Vortex Tier</h1>
         <div style="display:flex; gap:10px;">
             <a href="https://discord.gg/CNnWfV99m8" style="background: #5865F2; color: white; padding: 8px 15px; border-radius: 6px; text-decoration: none;">Discord</a>
-            <input type="text" id="tierSearch" placeholder="Search player..." onkeyup="liveSearch()" style="padding: 8px; border-radius: 6px; border: 1px solid #30363d; background: #0b0e14; color: white;">
+            <input type="text" id="tierSearch" placeholder="Search player..." style="padding: 8px; border-radius: 6px; border: 1px solid #30363d; background: #0b0e14; color: white;">
         </div>
     </header>
 
@@ -174,8 +224,8 @@
             <tr><th>#</th><th>Player</th><th>Region</th><th>Game Modes & Tiers</th></tr>
         </thead>
         <tbody id="playerTable">
-            <!-- Player 1 -->
-            <tr class="player-row-item">
+            <!-- Player 1 Row (Clickable) -->
+            <tr class="player-row-item" onclick="openPlayerModal('DIZZ69', 'Combat Master', '88 points', 'Asia', '1.', 'https://render.crafty.gg/3d/bust/4bb70487-9146-4fc7-89ec-971808e414b9')">
                 <td class="rank-col">1.</td>
                 <td>
                     <div class="player-container">
@@ -201,9 +251,46 @@
                     </div>
                 </td>
             </tr>
-            <!-- এভাবে বাকি প্লেয়ারদের রো গুলো সঠিকভাবে সাজানো হয়েছে -->
         </tbody>
     </table>
+</div>
+
+<!-- Player Details Modal (GUI Popup) -->
+<div id="playerModal">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closePlayerModal()">✕</button>
+        
+        <div class="modal-avatar-box">
+            <img id="modalSkinImg" src="" alt="Player Skin">
+        </div>
+        
+        <div class="modal-player-name" id="modalPlayerName">PlayerName</div>
+        
+        <div>
+            <span class="modal-rank-badge">
+                👑 <span id="modalRankText">Combat Master</span>
+            </span>
+        </div>
+        <div class="modal-region" id="modalRegionText">North America</div>
+        
+        <a href="#" target="_blank" class="namemc-link">🔗 NameMC</a>
+
+        <div class="modal-section-title">Position</div>
+        <div class="modal-position-box">
+            <span class="modal-pos-number" id="modalPositionNum">2.</span>
+            <span class="modal-pos-title">🏆 OVERALL (<span id="modalPointsText">330 points</span>)</span>
+        </div>
+
+        <div class="modal-section-title">Tiers</div>
+        <div class="modal-tiers-grid" id="modalTiersContainer">
+            <!-- এখানে স্বয়ংক্রিয়ভাবে বা আগের মতো টায়ার আইকনগুলো চলে আসবে -->
+            <div class="tier-item"><img src="https://i.postimg.cc/qM3XBvN6/nethop.png" class="tier-icon"><span class="tier-label" style="color: #f08a24;">HT3</span></div>
+            <div class="tier-item"><img src="https://i.postimg.cc/xdK4XPqk/axe.png" class="tier-icon"><span class="tier-label" style="color: #f08a24;">HT1</span></div>
+            <div class="tier-item"><img src="https://i.postimg.cc/zD9KQY0P/uhc.png" class="tier-icon"><span class="tier-label" style="color: #f08a24;">HT1</span></div>
+            <div class="tier-item"><img src="https://i.postimg.cc/cL1RRMDy/smp.png" class="tier-icon"><span class="tier-label" style="color: #f08a24;">HT1</span></div>
+            <div class="tier-item"><img src="https://i.postimg.cc/sXG1PvdS/pot.png" class="tier-icon"><span class="tier-label" style="color: #f08a24;">HT1</span></div>
+        </div>
+    </div>
 </div>
 
 <script>
@@ -220,8 +307,32 @@
             showWebsite();
         }
     }
+
+    // মোডাল ওপেন করার ফাংশন
+    function openPlayerModal(name, rank, points, region, position, skinUrl) {
+        document.getElementById('modalPlayerName').innerText = name;
+        document.getElementById('modalRankText').innerText = rank;
+        document.getElementById('modalPointsText').innerText = points;
+        document.getElementById('modalRegionText').innerText = region;
+        document.getElementById('modalPositionNum').innerText = position;
+        document.getElementById('modalSkinImg').src = skinUrl;
+        
+        document.getElementById('playerModal').style.display = 'flex';
+    }
+
+    // মোডাল বন্ধ করার ফাংশন
+    function closePlayerModal() {
+        document.getElementById('playerModal').style.display = 'none';
+    }
+
+    // বাইরে কোথাও ক্লিক করলেও পপ-আপ বন্ধ হয়ে যাবে
+    window.onclick = function(event) {
+        let modal = document.getElementById('playerModal');
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
 </script>
 
 </body>
 </html>
-
