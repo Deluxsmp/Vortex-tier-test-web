@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta property="og:title" content="Vortex Tier | Official Website" />
+    <meta property="og:site_name" content="Vortex Tier" />
+    <meta name="description" content="Vortex Tier - Vortex Tier is the best Minecraft PvP tier testing server with skilled testers, active leaderboards, fair rankings, and competitive gameplay.">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vortex Tier</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body { background-color: #07090e; color: #fff; }
+
+        nav { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 20px 5%; background: rgba(13, 17, 23, 0.85); 
+            backdrop-filter: blur(10px); position: absolute; top: 0; width: 100%; 
+            z-index: 2000; border-bottom: 1px solid rgba(48, 54, 61, 0.4);
+        }
+        nav .logo h2 { color: #facc15; font-weight: 800; letter-spacing: 0.5px; }
+        nav .menu a { color: #c9d1d9; text-decoration: none; margin-left: 25px; cursor: pointer; font-weight: 600; transition: color 0.2s; }
+        nav .menu a:hover { color: #facc15; }
+
+        #landing-page {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 20%, #1a1a3a 0%, #07090e 70%);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-align: center; padding: 20px; z-index: 1000;
+        }
+        .badge { 
+            background: rgba(26, 32, 44, 0.8); color: #818cf8; padding: 6px 16px; border-radius: 30px; 
+            margin-bottom: 25px; border: 1px solid rgba(99, 102, 241, 0.3); font-size: 0.8rem; 
+            display: inline-flex; align-items: center; gap: 8px; font-weight: 600;
+        }
+        .status-dot { width: 8px; height: 8px; background: #22c55e; border-radius: 50%; }
+        
+        h1 { font-size: 3.5rem; line-height: 1.15; margin-bottom: 20px; color: #fff; font-weight: 800; }
+        .highlight { color: #facc15; } 
+        
+        p { color: #8b949e; max-width: 550px; margin-bottom: 35px; font-size: 1.05rem; line-height: 1.6; }
+
+        .btn-group { display: flex; gap: 15px; }
+        .btn { padding: 14px 28px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; transition: all 0.3s ease; font-size: 0.95rem; }
+        .btn-primary { background: #6366f1; color: white; }
+        .btn-secondary { background: #161b22; color: white; border: 1px solid #30363d; }
+
+        #main-content { display: none; padding: 30px 20px; max-width: 1200px; margin: 0 auto; }
+        
+        header { 
+            background: #11161d; padding: 24px 30px; border-radius: 14px; margin-bottom: 25px; 
+            display: flex; justify-content: space-between; align-items: center; border: 1px solid #21262d;
+        }
+        header h1 { font-size: 1.8rem; margin: 0; color: #f0f6fc; }
+
+        .overall-table { 
+            width: 100%; background: #11161d; border-radius: 14px; border-collapse: collapse; 
+            border: 1px solid #21262d; overflow: hidden;
+        }
+        .overall-table th { 
+            background: #161b22; color: #8b949e; font-size: 0.85rem; text-transform: uppercase; 
+            padding: 16px 20px; border-bottom: 1px solid #21262d; text-align: left; 
+        }
+        .overall-table td { padding: 16px 20px; border-bottom: 1px solid #21262d; text-align: left; }
+
+        .player-row-item { cursor: pointer; transition: background 0.2s ease; }
+        .player-row-item:hover { background: #161b22; }
+
+        .rank-col { font-weight: bold; color: #8b949e; width: 50px; }
+        .player-container { display: flex; align-items: center; gap: 15px; }
+        .player-details { display: flex; flex-direction: column; gap: 4px; }
+        .player-name { font-weight: bold; color: #f0f6fc; font-size: 1.05rem; }
+        .rank-desc { font-size: 0.8rem; color: #8b949e; }
+        .player-skin-full { width: 32px; height: auto; object-fit: contain; }
+
+        .region-badge { 
+            background: rgba(239, 68, 68, 0.15); color: #f87171; padding: 2px 8px; 
+            border-radius: 5px; font-size: 0.68rem; font-weight: 700; border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .tiers-container { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+        .tier-item { display: flex; flex-direction: column; align-items: center; gap: 3px; background: rgba(22, 27, 34, 0.6); padding: 4px 8px; border-radius: 6px; border: 1px solid rgba(48, 54, 61, 0.5); }
+        .tier-icon { width: 20px; height: 20px; object-fit: contain; }
+        .tier-label { font-size: 0.65rem; font-weight: bold; }
+
+        /* --- Player Modal Styles --- */
+        #playerModal {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(5px); z-index: 3000;
+            justify-content: center; align-items: center;
+        }
+        .modal-content {
+            background: #11161d; width: 90%; max-width: 400px; border-radius: 18px;
+            padding: 30px 24px; position: relative; border: 1px solid #30363d; text-align: center;
+        }
+        .close-btn {
+            position: absolute; top: 18px; right: 18px; background: #161b22; border: 1px solid #30363d;
+            color: #8b949e; width: 32px; height: 32px; border-radius: 50%; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .modal-avatar-box {
+            width: 85px; height: 85px; background: #161b22; border-radius: 50%; margin: 0 auto 15px;
+            display: flex; align-items: center; justify-content: center; border: 2px solid #30363d; overflow: hidden;
+        }
+        .modal-avatar-box img { width: 55px; height: auto; }
+        .modal-player-name { font-size: 1.6rem; font-weight: 800; color: #fff; margin-bottom: 6px; }
+        .modal-rank-badge {
+            display: inline-flex; align-items: center; gap: 6px; background: #161b22; border: 1px solid #30363d;
+            padding: 6px 16px; border-radius: 20px; color: #fbbf24; font-weight: bold; font-size: 0.85rem; margin-bottom: 6px;
+        }
+        .modal-region { color: #8b949e; font-size: 0.85rem; margin-bottom: 16px; font-weight: 600; }
+        .namemc-link {
+            display: inline-flex; align-items: center; gap: 6px; background: #161b22; color: #c9d1d9;
+            padding: 6px 14px; border-radius: 8px; font-size: 0.8rem; text-decoration: none; border: 1px solid #30363d; margin-bottom: 22px;
+        }
+        .modal-section-title { text-align: left; font-size: 0.75rem; color: #8b949e; text-transform: uppercase; margin-bottom: 8px; font-weight: 700; }
+        .modal-position-box {
+            background: #07090e; border: 1px solid #21262d; padding: 12px 18px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;
+        }
+        .modal-pos-number { font-size: 1.3rem; font-weight: 800; color: #fff; }
+        .modal-pos-title { color: #fbbf24; font-weight: 700; font-size: 0.85rem; }
+        .modal-tiers-grid { background: #07090e; border: 1px solid #21262d; padding: 12px; border-radius: 10px; display: flex; justify-content: space-around; gap: 5px; }
+    </style>
+</head>
+<body>
+
+<!-- ল্যান্ডিং পেজ -->
+<div id="landing-page">
+    <nav>
+        <div class="logo"><h2>Vortex Tier</h2></div>
+        <div class="menu">
+            <a onclick="showSection('landing-page')">Home</a>
+            <a onclick="showSection('main-content')">Ranking</a>
+            <a href="https://discord.gg/CNnWfV99m8">Discord</a>
+        </div>
+    </nav>
+    <div class="badge"><div class="status-dot"></div> Server Active ● LIVE</div>
+    <h1>The <span class="highlight">#1 Cracked</span><br>& Premium Tierlist</h1>
+    <p>Vortex Tier is the best Minecraft PvP tier testing server with skilled testers, active leaderboards, fair rankings, and competitive gameplay.</p>
+    
+    <div class="btn-group">
+        <button class="btn btn-primary" onclick="showWebsite()">⚡ View Tier List</button>
+        <button class="btn btn-secondary" onclick="window.location.href='https://discord.gg/CNnWfV99m8'">Join Discord</button>
+    </div>
+</div>
+
+<!-- মেইন ওয়েবসাইট -->
+<div id="main-content">
+    <header>
+        <h1>Vortex Rankings</h1>
+        <div style="display:flex; gap:12px; align-items: center;">
+            <a href="https://discord.gg/CNnWfV99m8" style="background: #5865F2; color: white; padding: 9px 16px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.9rem;">Discord</a>
+            <input type="text" id="tierSearch" placeholder="Search player..." style="padding: 9px 14px; border-radius: 8px; border: 1px solid #30363d; background: #07090e; color: white; outline: none; font-size: 0.9rem;">
+        </div>
+    </header>
+
+    <div style="overflow-x: auto;">
+        <table class="overall-table">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Player</th>
+                    <th>Region</th>
+                    <th>Game Modes & Tiers</th>
+                </tr>
+            </thead>
+            <tbody id="playerTable">
+                <!-- জাভাস্ক্রিপ্ট স্বয়ংক্রিয়ভাবে পয়েন্ট অনুযায়ী প্লেয়ারদের এখানে সাজিয়ে বসিয়ে দেবে -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Player Details Modal -->
+<div id="playerModal">
+    <div class="modal-content">
+        <button class="close-btn" onclick="closePlayerModal()">✕</button>
+        <div class="modal-avatar-box">
+            <img id="modalSkinImg" src="" alt="Player Skin">
+        </div>
+        <div class="modal-player-name" id="modalPlayerName">PlayerName</div>
+        <div>
+            <span class="modal-rank-badge">👑 <span id="modalRankText">Combat Master</span></span>
+        </div>
+        <div class="modal-region" id="modalRegionText">Asia</div>
+        <a id="modalNameMCLink" href="#" target="_blank" class="namemc-link">🔗 NameMC</a>
+
+        <div class="modal-section-title">Position</div>
+        <div class="modal-position-box">
+            <span class="modal-pos-number" id="modalPositionNum">1.</span>
+            <span class="modal-pos-title">🏆 OVERALL (<span id="modalPointsText">0 points</span>)</span>
+        </div>
+
+        <div class="modal-section-title">Tiers</div>
+        <div class="modal-tiers-grid" id="modalTiersContainer">
+            <!-- টায়ার আইকনগুলো এখানে ডায়নামিক দেখাবে -->
+        </div>
+    </div>
+</div>
+
+<script>
+    // ==========================================
+    // 🎛️ অ্যাডমিন ডেটা প্যানেল (এখানে নতুন প্লেয়ার যোগ করুন বা পয়েন্ট বদলান)
+    // সিস্টেম নিজে থেকেই বেশি পয়েন্ট ওয়ালাকে উপরে (১ নাম্বারে) নিয়ে আসবে!
+    // ==========================================
+    const playersData = [
+        {
+            name: "DIZZ69",
+            rank: "Combat Master",
+            points: 88,
+            region: "AS",
+            regionFull: "Asia",
+            tiers: [
+                { icon: "https://i.postimg.cc/qM3XBvN6/nethop.png", label: "HT4" },
+                { icon: "https://i.postimg.cc/xdK4XPqk/axe.png", label: "HT5" },
+                { icon: "https://i.postimg.cc/nLYDjsJS/638965736295609752.png", label: "HT5" },
+                { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "LT4" },
+                { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "HT5" }
+            ]
+        },
+        {
+            name: "ItzRealMe",
+            rank: "Combat Grandmaster",
+            points: 330,
+            region: "NA",
+            regionFull: "North America",
+            tiers: [
+                { icon: "https://i.postimg.cc/xdK4XPqk/axe.png", label: "HT1" },
+                { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "HT1" }
+            ]
+        },
+        {
+            name: "Coldified",
+            rank: "Combat Master",
+            points: 150,
+            region: "EU",
+            regionFull: "Europe",
+            tiers: [
+                { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "LT1" }
+            ]
+        }
+    ];
+
+    function renderTable() {
+        // পয়েন্ট বেশি থেকে কম ক্রমানুসারে সর্ট করা (Auto Sorting)
+        playersData.sort((a, b) => b.points - a.points);
+
+        const tbody = document.getElementById('playerTable');
+        tbody.innerHTML = "";
+
+        playersData.forEach((player, index) => {
+            let tiersHTML = '';
+            player.tiers.forEach(t => {
+                tiersHTML += `<div class="tier-item"><img src="${t.icon}" class="tier-icon"><span class="tier-label" style="color: #f08a24;">${t.label}</span></div>`;
+            });
+
+            let row = document.createElement('tr');
+            row.className = "player-row-item";
+            row.onclick = () => openPlayerModal(index);
+
+            row.innerHTML = `
+                <td class="rank-col">${index + 1}.</td>
+                <td>
+                    <div class="player-container">
+                        <img src="https://render.crafty.gg/3d/bust/${player.name}" class="player-skin-full" alt="skin" onerror="this.src='https://render.crafty.gg/3d/bust/steve'">
+                        <div class="player-details">
+                            <span class="player-name">${player.name}</span>
+                            <span class="rank-desc">${player.rank} (${player.points} points)</span>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div style="display:flex; align-items:center;">
+                        <span class="region-badge">${player.region}</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="tiers-container">${tiersHTML}</div>
+                </td>
+            `;
+            tbody.appendChild(row);
+        });
+    }
+
+    function showWebsite() {
+        document.getElementById('landing-page').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+        renderTable();
+    }
+    
+    function showSection(sectionId) {
+        if(sectionId === 'landing-page') {
+            document.getElementById('landing-page').style.display = 'flex';
+            document.getElementById('main-content').style.display = 'none';
+        } else {
+            showWebsite();
+        }
+    }
+
+    function openPlayerModal(index) {
+        const player = playersData[index];
+        document.getElementById('modalPlayerName').innerText = player.name;
+        document.getElementById('modalRankText').innerText = player.rank;
+        document.getElementById('modalPointsText').innerText = player.points + " points";
+        document.getElementById('modalRegionText').innerText = player.regionFull;
+        document.getElementById('modalPositionNum').innerText = (index + 1) + ".";
+        
+        let skinUrl = `https://render.crafty.gg/3d/bust/${player.name}`;
+        let modalImg = document.getElementById('modalSkinImg');
+        modalImg.src = skinUrl;
+        modalImg.onerror = function() {
+            this.src = 'https://render.crafty.gg/3d/bust/steve';
+        };
+
+        document.getElementById('modalNameMCLink').href = `https://namemc.com/search?q=${player.name}`;
+
+        let modalTiersHTML = '';
+        player.tiers.forEach(t => {
+            modalTiersHTML += `<div class="tier-item"><img src="${t.icon}" class="tier-icon"><span class="tier-label" style="color: #f08a24;">${t.label}</span></div>`;
+        });
+        document.getElementById('modalTiersContainer').innerHTML = modalTiersHTML;
+        
+        document.getElementById('playerModal').style.display = 'flex';
+    }
+
+    function closePlayerModal() {
+        document.getElementById('playerModal').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+        let modal = document.getElementById('playerModal');
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    }
+</script>
+
+</body>
+</html>
