@@ -9,7 +9,7 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', 'Segoe UI', sans-serif; }
-body { background-color: var(--bg-color); color: var(--text-main); overflow-x: hidden; }
+body { background-color: var(--bg-color); color: var(--text-main); min-width: 1150px; overflow-x: auto; }
 
 /* --- Navigation Bar --- */
 nav { 
@@ -49,7 +49,7 @@ p { color: var(--text-muted); max-width: 600px; margin-bottom: 35px; font-size: 
 .btn-secondary:hover { background: var(--card-hover); }
 
 /* --- Main Content / Leaderboard --- */
-#main-content { display: none; padding: 110px 5% 50px 5%; max-width: 1350px; margin: 0 auto; min-height: 100vh; }
+#main-content { display: none; padding: 110px 5% 50px 5%; max-width: 1350px; min-width: 1100px; width: 100%; margin: 0 auto; min-height: 100vh; }
 
 .header-panel { 
     background: var(--card-bg); padding: 25px 35px; border-radius: 16px; margin-bottom: 30px; 
@@ -65,8 +65,8 @@ p { color: var(--text-muted); max-width: 600px; margin-bottom: 35px; font-size: 
 }
 .search-box:focus { border-color: var(--accent-color); }
 
-/* --- Table Design (গ্যাপ কমানো এবং স্কিনের সাথে অ্যাডজাস্ট করা হয়েছে) --- */
-.overall-table { width: 100%; border-collapse: separate; border-spacing: 0 4px; }
+/* --- Table Design --- */
+.overall-table { width: 100%; border-collapse: separate; border-spacing: 0 4px; white-space: nowrap; }
 .overall-table th { 
     color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; 
     padding: 0 15px 8px 15px; text-align: left; letter-spacing: 1px; font-weight: 700;
@@ -155,7 +155,7 @@ p { color: var(--text-muted); max-width: 600px; margin-bottom: 35px; font-size: 
     display: inline-flex; align-items: center; gap: 6px; background: var(--bg-color); color: var(--text-main);
     padding: 8px 16px; border-radius: 8px; font-size: 0.85rem; text-decoration: none; border: 1px solid var(--border-color); margin-bottom: 24px; font-weight: 600; transition: border-color 0.2s;
 }
-.namemc-link:hover { border-color: var(--accent-key); }
+.namemc-link:hover { border-color: var(--accent-color); }
 
 .modal-section-title { text-align: left; font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px; font-weight: 800; letter-spacing: 0.5px; }
 .modal-position-box {
