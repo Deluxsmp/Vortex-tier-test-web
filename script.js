@@ -15,6 +15,38 @@ const playersData = [
             { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "HT5" }
         ]
     },
+    {
+        name: "ifti",
+        points: 85,
+        region: "AS",
+        regionFull: "Asia",
+        tiers: [
+            { icon: "https://i.postimg.cc/qM3XBvN6/nethop.png", label: "LT3" },
+            { icon: "https://i.postimg.cc/xdK4XPqk/axe.png", label: "?" },
+            { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "HT4" },
+            { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "?" },
+            { icon: "https://i.postimg.cc/zD9KQY0P/uhc.png", label: "?" },
+            { icon: "https://i.postimg.cc/cL1RRMDy/smp.png", label: "?" },
+            { icon: "https://i.postimg.cc/nLYDjsJS/638965736295609752.png", label: "HT4" },
+            { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "?" }
+        ]
+    },
+    {
+        name: "PriyanshuOG_",
+        points: 81,
+        region: "AS",
+        regionFull: "Asia",
+        tiers: [
+            { icon: "https://i.postimg.cc/qM3XBvN6/nethop.png", label: "HT4" },
+            { icon: "https://i.postimg.cc/xdK4XPqk/axe.png", label: "HT5" },
+            { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "LT4" },
+            { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "LT4" },
+            { icon: "https://i.postimg.cc/zD9KQY0P/uhc.png", label: "HT5" },
+            { icon: "https://i.postimg.cc/cL1RRMDy/smp.png", label: "?" },
+            { icon: "https://i.postimg.cc/nLYDjsJS/638965736295609752.png", label: "LT4" },
+            { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "LT4" }
+        ]
+    },
 ];
 
 function renderTable(dataToRender = playersData) {
