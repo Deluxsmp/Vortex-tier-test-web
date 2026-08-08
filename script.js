@@ -1,100 +1,20 @@
 const playersData = [
     {
-        name: "Se9ku",
-        points: 90,
+        name: "DIZZ69",
+        points: 88,
         region: "AS",
-        regionFull: "North America",
+        regionFull: "Asia",
         tiers: [
-            { icon: "https://i.postimg.cc/qM3XBvN6/nethop.png", label: "HT3" },
-            { icon: "https://i.postimg.cc/xdK4XPqk/axe.png", label: "HT1" },
-            { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "HT1" },
-            { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "HT1" },
-            { icon: "https://i.postimg.cc/zD9KQY0P/uhc.png", label: "HT1" },
-            { icon: "https://i.postimg.cc/cL1RRMDy/smp.png", label: "HT1" },
-            { icon: "https://i.postimg.cc/nLYDjsJS/638965736295609752.png", label: "LT2" },
-            { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "LT2" }
+            { icon: "https://i.postimg.cc/qM3XBvN6/nethop.png", label: "HT4" },
+            { icon: "https://i.postimg.cc/xdK4XPqk/axe.png", label: "HT5" },
+            { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "LT4" },
+            { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "?" },
+            { icon: "https://i.postimg.cc/zD9KQY0P/uhc.png", label: "?" },
+            { icon: "https://i.postimg.cc/cL1RRMDy/smp.png", label: "?" },
+            { icon: "https://i.postimg.cc/nLYDjsJS/638965736295609752.png", label: "HT5" },
+            { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "HT5" }
         ]
     },
-    {
-        name: "Itz_Dhrubo",
-        points: 490,
-        region: "AS",
-        regionFull: "North America",
-        tiers: [
-            { icon: "https://i.postimg.cc/qM3XBvN6/nethop.png", label: "HT3" },
-            { icon: "https://i.postimg.cc/xdK4XPqk/axe.png", label: "HT1" },
-            { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "HT1" },
-            { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "HT1" },
-            { icon: "https://i.postimg.cc/zD9KQY0P/uhc.png", label: "HT1" },
-            { icon: "https://i.postimg.cc/cL1RRMDy/smp.png", label: "HT1" },
-            { icon: "https://i.postimg.cc/nLYDjsJS/638965736295609752.png", label: "LT2" },
-            { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "LT2" }
-        ]
-    },
-    {
-        name: "Marlowww",
-        points: 450,
-        region: "NA",
-        regionFull: "North America",
-        tiers: [
-            { icon: "https://i.postimg.cc/qM3XBvN6/nethop.png", label: "HT1" },
-            { icon: "https://i.postimg.cc/xdK4XPqk/axe.png", label: "HT1" },
-            { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "HT1" },
-            { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "HT1" },
-            { icon: "https://i.postimg.cc/zD9KQY0P/uhc.png", label: "HT1" },
-            { icon: "https://i.postimg.cc/cL1RRMDy/smp.png", label: "HT1" },
-            { icon: "https://i.postimg.cc/nLYDjsJS/638965736295609752.png", label: "LT1" },
-            { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "LT1" }
-        ]
-    },
-    {
-        name: "ItzRealMe",
-        points: 330,
-        region: "NA",
-        regionFull: "North America",
-        tiers: [
-            { icon: "https://i.postimg.cc/qM3XBvN6/nethop.png", label: "HT3" },
-            { icon: "https://i.postimg.cc/xdK4XPqk/axe.png", label: "HT1" },
-            { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "HT1" },
-            { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "HT1" },
-            { icon: "https://i.postimg.cc/zD9KQY0P/uhc.png", label: "HT1" },
-            { icon: "https://i.postimg.cc/cL1RRMDy/smp.png", label: "HT1" },
-            { icon: "https://i.postimg.cc/nLYDjsJS/638965736295609752.png", label: "LT2" },
-            { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "LT2" }
-        ]
-    },
-    {
-        name: "ninorc15",
-        points: 196,
-        region: "EU",
-        regionFull: "Europe",
-        tiers: [
-            { icon: "https://i.postimg.cc/qM3XBvN6/nethop.png", label: "LT2" },
-            { icon: "https://i.postimg.cc/xdK4XPqk/axe.png", label: "LT3" },
-            { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "LT1" },
-            { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "LT2" },
-            { icon: "https://i.postimg.cc/zD9KQY0P/uhc.png", label: "LT2" },
-            { icon: "https://i.postimg.cc/cL1RRMDy/smp.png", label: "LT2" },
-            { icon: "https://i.postimg.cc/nLYDjsJS/638965736295609752.png", label: "LT2" },
-            { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "LT2" }
-        ]
-    },
-    {
-        name: "Swight",
-        points: 290,
-        region: "NA",
-        regionFull: "North America",
-        tiers: [
-            { icon: "https://i.postimg.cc/qM3XBvN6/nethop.png", label: "LT3" },
-            { icon: "https://i.postimg.cc/xdK4XPqk/axe.png", label: "HT1" },
-            { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "HT1" },
-            { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "HT1" },
-            { icon: "https://i.postimg.cc/zD9KQY0P/uhc.png", label: "HT1" },
-            { icon: "https://i.postimg.cc/cL1RRMDy/smp.png", label: "HT2" },
-            { icon: "https://i.postimg.cc/nLYDjsJS/638965736295609752.png", label: "LT2" },
-            { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "LT2" }
-        ]
-    }
 ];
 
 function renderTable(dataToRender = playersData) {
