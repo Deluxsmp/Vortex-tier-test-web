@@ -95,28 +95,23 @@
             text-align: left; 
         }
 
-        /* Clickable Table Row */
         .player-row-item { cursor: pointer; transition: background 0.2s ease; }
         .player-row-item:hover { background: #161b22; }
 
         .rank-col { font-weight: bold; color: #8b949e; width: 50px; }
 
         .player-container { display: flex; align-items: center; gap: 15px; }
-        
-        /* প্লেয়ারের নাম এবং রিজিওন এক সারিতে বা নিচে সুন্দরভাবে সাজানোর বক্স */
         .player-details { display: flex; flex-direction: column; gap: 4px; }
-        .player-name-wrapper { display: flex; align-items: center; gap: 10px; }
         .player-name { font-weight: bold; color: #f0f6fc; font-size: 1.05rem; }
-        
         .rank-desc { font-size: 0.8rem; color: #8b949e; }
 
+        /* টেবিলের জন্য অটো স্কিন সাইজ (Full Skin 3D) */
         .player-skin-full {
-            width: 38px;
+            width: 32px;
             height: auto;
             object-fit: contain;
         }
 
-        /* রিজিওন ব্যাজ এখন ঠিক নামের নিচেই বা পাশে সুন্দরভাবে এডজাস্ট করা */
         .region-badge { 
             background: rgba(239, 68, 68, 0.15); 
             color: #f87171; 
@@ -125,8 +120,12 @@
             font-size: 0.68rem; 
             font-weight: 700; 
             border: 1px solid rgba(239, 68, 68, 0.3);
-            width: fit-content;
             letter-spacing: 0.5px;
+        }
+
+        .region-col-cell {
+            display: flex;
+            align-items: center;
         }
 
         .tiers-container { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
@@ -187,7 +186,7 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             overflow: hidden;
         }
-        .modal-avatar-box img { width: 65px; height: auto; }
+        .modal-avatar-box img { width: 55px; height: auto; }
         .modal-player-name { font-size: 1.6rem; font-weight: 800; color: #fff; margin-bottom: 6px; }
         
         .modal-rank-badge {
@@ -277,21 +276,26 @@
                 <tr>
                     <th>#</th>
                     <th>Player</th>
+                    <th>Region</th>
                     <th>Game Modes & Tiers</th>
                 </tr>
             </thead>
             <tbody id="playerTable">
-                <!-- Player 1 Row (Clickable) -->
-                <tr class="player-row-item" onclick="openPlayerModal('DIZZ69', 'Combat Master', '88 points', 'Asia', '1.', 'https://render.crafty.gg/3d/bust/4bb70487-9146-4fc7-89ec-971808e414b9')">
+                <!-- Player 1 Row: শুধু নাম লিখে দিলেই Crafty.gg API থেকে অটো স্কিন চলে আসবে। প্রিমিয়াম না হলে ডিফল্ট দেখাবে। -->
+                <tr class="player-row-item" onclick="openPlayerModal('DIZZ69', 'Combat Master', '88 points', 'Asia', '1.')">
                     <td class="rank-col">1.</td>
                     <td>
                         <div class="player-container">
-                            <img src="https://render.crafty.gg/3d/bust/4bb70487-9146-4fc7-89ec-971808e414b9" class="player-skin-full" alt="skin">
+                            <img src="https://render.crafty.gg/3d/bust/DIZZ69" class="player-skin-full" alt="skin" onerror="this.src='https://render.crafty.gg/3d/bust/steve'">
                             <div class="player-details">
                                 <span class="player-name">DIZZ69</span>
-                                <span class="region-badge">AS</span>
                                 <span class="rank-desc">Combat Master (88 points)</span>
                             </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="region-col-cell">
+                            <span class="region-badge">AS</span>
                         </div>
                     </td>
                     <td>
@@ -330,7 +334,7 @@
         </div>
         <div class="modal-region" id="modalRegionText">Asia</div>
         
-        <a href="#" target="_blank" class="namemc-link">🔗 NameMC</a>
+        <a id="modalNameMCLink" href="#" target="_blank" class="namemc-link">🔗 NameMC</a>
 
         <div class="modal-section-title">Position</div>
         <div class="modal-position-box">
@@ -364,13 +368,23 @@
         }
     }
 
-    function openPlayerModal(name, rank, points, region, position, skinUrl) {
+    function openPlayerModal(name, rank, points, region, position) {
         document.getElementById('modalPlayerName').innerText = name;
         document.getElementById('modalRankText').innerText = rank;
         document.getElementById('modalPointsText').innerText = points;
         document.getElementById('modalRegionText').innerText = region;
         document.getElementById('modalPositionNum').innerText = position;
-        document.getElementById('modalSkinImg').src = skinUrl;
+        
+        // অটো প্লেয়ারের নাম অনুযায়ী স্কিন লোড করবে, প্রিমিয়াম না হলে স্টিভ/অ্যালেক্স দেখাবে
+        let skinUrl = `https://render.crafty.gg/3d/bust/${name}`;
+        let modalImg = document.getElementById('modalSkinImg');
+        modalImg.src = skinUrl;
+        modalImg.onerror = function() {
+            this.src = 'https://render.crafty.gg/3d/bust/steve';
+        };
+
+        // NameMC লিংক ডাইনামিক করা
+        document.getElementById('modalNameMCLink').href = `https://namemc.com/search?q=${name}`;
         
         document.getElementById('playerModal').style.display = 'flex';
     }
