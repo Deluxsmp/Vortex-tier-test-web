@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-    <meta property="og:title" content="Vortex Tier | Official Website" />
-    <meta property="og:site_name" content="Vortex Tier" />
-    <meta name="description" content="Vortex Tier - Vortex Tier is the best Minecraft PvP tier testing server with skilled testers, active leaderboards, fair rankings, and competitive gameplay.">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vortex Tier</title>
@@ -17,8 +14,8 @@
             backdrop-filter: blur(10px); position: absolute; top: 0; width: 100%; 
             z-index: 2000; border-bottom: 1px solid rgba(48, 54, 61, 0.4);
         }
-        nav .logo h2 { color: #facc15; font-weight: 800; letter-spacing: 0.5px; }
-        nav .menu a { color: #c9d1d9; text-decoration: none; margin-left: 25px; cursor: pointer; font-weight: 600; transition: color 0.2s; }
+        nav .logo h2 { color: #facc15; font-weight: 800; }
+        nav .menu a { color: #c9d1d9; text-decoration: none; margin-left: 25px; cursor: pointer; font-weight: 600; }
         nav .menu a:hover { color: #facc15; }
 
         #landing-page {
@@ -36,11 +33,10 @@
         
         h1 { font-size: 3.5rem; line-height: 1.15; margin-bottom: 20px; color: #fff; font-weight: 800; }
         .highlight { color: #facc15; } 
-        
         p { color: #8b949e; max-width: 550px; margin-bottom: 35px; font-size: 1.05rem; line-height: 1.6; }
 
         .btn-group { display: flex; gap: 15px; }
-        .btn { padding: 14px 28px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; transition: all 0.3s ease; font-size: 0.95rem; }
+        .btn { padding: 14px 28px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 0.95rem; }
         .btn-primary { background: #6366f1; color: white; }
         .btn-secondary { background: #161b22; color: white; border: 1px solid #30363d; }
 
@@ -52,51 +48,74 @@
         }
         header h1 { font-size: 1.8rem; margin: 0; color: #f0f6fc; }
 
+        /* mctiers হুবহু কার্ড স্টাইল টেবিল */
         .overall-table { 
-            width: 100%; background: #11161d; border-radius: 14px; border-collapse: collapse; 
-            border: 1px solid #21262d; overflow: hidden;
+            width: 100%; border-collapse: separate; border-spacing: 0 10px; 
         }
         .overall-table th { 
-            background: #161b22; color: #8b949e; font-size: 0.8rem; text-transform: uppercase; 
-            padding: 14px 18px; border-bottom: 1px solid #21262d; text-align: left; 
-            letter-spacing: 0.8px;
+            color: #8b949e; font-size: 0.8rem; text-transform: uppercase; 
+            padding: 0 18px 10px 18px; text-align: left; letter-spacing: 0.8px; 
         }
-        .overall-table td { padding: 12px 18px; border-bottom: 1px solid #21262d; text-align: left; vertical-align: middle; position: relative; }
+        
+        .player-row-item { 
+            background: #11161d; 
+            cursor: pointer; 
+            transition: all 0.2s ease; 
+            border: 1px solid #21262d;
+        }
+        .player-row-item td { 
+            padding: 12px 18px; 
+            border-top: 1px solid #21262d; 
+            border-bottom: 1px solid #21262d; 
+            vertical-align: middle; 
+        }
+        .player-row-item td:first-child { 
+            border-left: 1px solid #21262d; 
+            border-top-left-radius: 10px; 
+            border-bottom-left-radius: 10px; 
+        }
+        .player-row-item td:last-child { 
+            border-right: 1px solid #21262d; 
+            border-top-right-radius: 10px; 
+            border-bottom-right-radius: 10px; 
+        }
+        .player-row-item:hover { background: #161b22; border-color: #30363d; }
 
-        .player-row-item { cursor: pointer; transition: background 0.2s ease; }
-        .player-row-item:hover { background: rgba(255, 255, 255, 0.02); }
+        .rank-col { font-weight: 900; font-size: 1.25rem; width: 70px; font-style: italic; color: #8b949e; }
 
-        .rank-col { font-weight: 900; font-size: 1.25rem; width: 60px; font-style: italic; }
+        /* ১, ২, ৩ নম্বরের বিশেষ কালার ও গ্লো ইফেক্ট */
+        .row-rank-1 { background: linear-gradient(90deg, rgba(234, 179, 8, 0.12) 0%, #11161d 50%); border-color: rgba(234, 179, 8, 0.4); }
+        .row-rank-1 .rank-col { color: #facc15; }
 
-        /* mctiers এর হুবহু স্টাইল: প্লেয়ারের স্কিন বা নাম থেকে শুরু হয়ে টেবিল জুড়ে হালকা লাইন ও গ্লো কালার ব্যাকগ্রাউন্ড */
-        .row-rank-1 td { background: linear-gradient(90deg, rgba(234, 179, 8, 0.16) 0%, rgba(234, 179, 8, 0.04) 40%, rgba(17, 22, 29, 0) 100%); }
-        .row-rank-1 .rank-col { color: #facc15; text-shadow: 0 0 10px rgba(250, 204, 21, 0.4); }
+        .row-rank-2 { background: linear-gradient(90deg, rgba(148, 163, 184, 0.12) 0%, #11161d 50%); border-color: rgba(148, 163, 184, 0.4); }
+        .row-rank-2 .rank-col { color: #cbd5e1; }
 
-        .row-rank-2 td { background: linear-gradient(90deg, rgba(148, 163, 184, 0.16) 0%, rgba(148, 163, 184, 0.04) 40%, rgba(17, 22, 29, 0) 100%); }
-        .row-rank-2 .rank-col { color: #cbd5e1; text-shadow: 0 0 10px rgba(203, 213, 225, 0.3); }
-
-        .row-rank-3 td { background: linear-gradient(90deg, rgba(249, 115, 22, 0.16) 0%, rgba(249, 115, 22, 0.04) 40%, rgba(17, 22, 29, 0) 100%); }
-        .row-rank-3 .rank-col { color: #fb923c; text-shadow: 0 0 10px rgba(251, 146, 60, 0.3); }
+        .row-rank-3 { background: linear-gradient(90deg, rgba(249, 115, 22, 0.12) 0%, #11161d 50%); border-color: rgba(249, 115, 22, 0.4); }
+        .row-rank-3 .rank-col { color: #fb923c; }
 
         .player-container { display: flex; align-items: center; gap: 14px; }
-        .player-details { display: flex; flex-direction: column; gap: 2px; }
-        .player-name { font-weight: 700; color: #f0f6fc; font-size: 1rem; }
-        .rank-desc { font-size: 0.75rem; color: #8b949e; display: flex; align-items: center; gap: 5px; font-weight: 500; }
-        .player-skin-full { width: 30px; height: auto; object-fit: contain; }
+        .player-details { display: flex; flex-direction: column; gap: 3px; }
+        
+        /* ছবি অনুযায়ী প্লেয়ারের নাম বোল্ড ও উজ্জ্বল */
+        .player-name { font-weight: 800; color: #f0f6fc; font-size: 1.05rem; }
+        
+        /* র‍্যাংক, ডায়মন্ড আইকন এবং পয়েন্ট বোল্ড স্টাইল */
+        .rank-desc { font-size: 0.78rem; color: #94a3b8; display: flex; align-items: center; gap: 6px; font-weight: 700; }
+        .player-skin-full { width: 32px; height: auto; object-fit: contain; }
 
+        /* রিজন ব্যাজ (বোল্ড ও পরিষ্কার) */
         .region-badge { 
-            background: rgba(239, 68, 68, 0.15); color: #f87171; padding: 3px 7px; 
-            border-radius: 4px; font-size: 0.65rem; font-weight: 800; border: 1px solid rgba(239, 68, 68, 0.3);
-            letter-spacing: 0.5px;
+            padding: 4px 10px; border-radius: 6px; font-size: 0.72rem; font-weight: 900; border: 1px solid; letter-spacing: 0.8px; display: inline-block;
         }
-        .region-na { background: rgba(239, 68, 68, 0.15); color: #f87171; border-color: rgba(239, 68, 68, 0.3); }
-        .region-eu { background: rgba(34, 197, 94, 0.15); color: #4ade80; border-color: rgba(34, 197, 94, 0.3); }
-        .region-as { background: rgba(59, 130, 246, 0.15); color: #60a5fa; border-color: rgba(59, 130, 246, 0.3); }
+        .region-na { background: rgba(239, 68, 68, 0.15); color: #f87171; border-color: rgba(239, 68, 68, 0.35); }
+        .region-eu { background: rgba(34, 197, 94, 0.15); color: #4ade80; border-color: rgba(34, 197, 94, 0.35); }
+        .region-me { background: rgba(168, 85, 247, 0.15); color: #c084fc; border-color: rgba(168, 85, 247, 0.35); }
 
-        .tiers-container { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
-        .tier-item { display: flex; flex-direction: column; align-items: center; gap: 2px; }
-        .tier-icon { width: 18px; height: 18px; object-fit: contain; opacity: 0.9; }
-        .tier-label { font-size: 0.62rem; font-weight: 700; color: #d97706; }
+        /* গেম মোড টিয়ার আইকন ও লেবেল */
+        .tiers-container { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; }
+        .tier-item { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+        .tier-icon { width: 20px; height: 20px; object-fit: contain; }
+        .tier-label { font-size: 0.65rem; font-weight: 800; color: #facc15; }
         .tier-empty { font-size: 0.75rem; color: #484f58; font-weight: bold; }
 
         /* --- Player Modal Styles --- */
@@ -214,9 +233,6 @@
 </div>
 
 <script>
-    // ==========================================
-    // 🎛️ অ্যাডমিন ডেটা প্যানেল
-    // ==========================================
     const playersData = [
         {
             name: "Marlowww",
@@ -251,18 +267,18 @@
             ]
         },
         {
-            name: "coldified",
-            points: 326,
+            name: "ninorc15",
+            points: 196,
             region: "EU",
             regionFull: "Europe",
             tiers: [
-                { icon: "https://i.postimg.cc/qM3XBvN6/nethop.png", label: "LT1" },
+                { icon: "https://i.postimg.cc/qM3XBvN6/nethop.png", label: "LT2" },
                 { icon: "https://i.postimg.cc/xdK4XPqk/axe.png", label: "LT3" },
-                { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "HT1" },
-                { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "HT1" },
-                { icon: "https://i.postimg.cc/zD9KQY0P/uhc.png", label: "HT1" },
-                { icon: "https://i.postimg.cc/cL1RRMDy/smp.png", label: "LT1" },
-                { icon: "https://i.postimg.cc/nLYDjsJS/638965736295609752.png", label: "LT1" },
+                { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "LT1" },
+                { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "LT2" },
+                { icon: "https://i.postimg.cc/zD9KQY0P/uhc.png", label: "LT2" },
+                { icon: "https://i.postimg.cc/cL1RRMDy/smp.png", label: "LT2" },
+                { icon: "https://i.postimg.cc/nLYDjsJS/638965736295609752.png", label: "LT2" },
                 { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "LT2" }
             ]
         },
@@ -332,14 +348,12 @@
                         <img src="https://render.crafty.gg/3d/bust/${player.name}" class="player-skin-full" alt="skin" onerror="this.src='https://render.crafty.gg/3d/bust/steve'">
                         <div class="player-details">
                             <span class="player-name">${player.name}</span>
-                            <span class="rank-desc">🛡️ ${computedRank} <span style="color:#555">(${player.points} pts)</span></span>
+                            <span class="rank-desc"><span style="color:#f43f5e">♦</span> ${computedRank} <span style="color:#8b949e">(${player.points} points)</span></span>
                         </div>
                     </div>
                 </td>
                 <td>
-                    <div style="display:flex; align-items:center;">
-                        <span class="${regionClass}">${player.region}</span>
-                    </div>
+                    <span class="${regionClass}">${player.region}</span>
                 </td>
                 <td>
                     <div class="tiers-container">${tiersHTML}</div>
