@@ -16,6 +16,22 @@ const playersData = [
         ]
     },
     {
+        name: "BDdream",
+        points: 11,
+        region: "AS",
+        regionFull: "Asia",
+        tiers: [
+            { icon: "https://i.postimg.cc/qM3XBvN6/nethop.png", label: "?" },
+            { icon: "https://i.postimg.cc/xdK4XPqk/axe.png", label: "?" },
+            { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "?" },
+            { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "?" },
+            { icon: "https://i.postimg.cc/zD9KQY0P/uhc.png", label: "?" },
+            { icon: "https://i.postimg.cc/cL1RRMDy/smp.png", label: "?" },
+            { icon: "https://i.postimg.cc/nLYDjsJS/638965736295609752.png", label: "LT5" },
+            { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "LT5" }
+        ]
+    },
+    {
         name: "drifttV4",
         points: 14,
         region: "AS",
@@ -28,6 +44,22 @@ const playersData = [
             { icon: "https://i.postimg.cc/zD9KQY0P/uhc.png", label: "?" },
             { icon: "https://i.postimg.cc/cL1RRMDy/smp.png", label: "?" },
             { icon: "https://i.postimg.cc/nLYDjsJS/638965736295609752.png", label: "?" },
+            { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "?" }
+        ]
+    },
+    {
+        name: "SyferSenpai",
+        points: 12,
+        region: "AS",
+        regionFull: "Asia",
+        tiers: [
+            { icon: "https://i.postimg.cc/qM3XBvN6/nethop.png", label: "?" },
+            { icon: "https://i.postimg.cc/xdK4XPqk/axe.png", label: "?" },
+            { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "?" },
+            { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "?" },
+            { icon: "https://i.postimg.cc/zD9KQY0P/uhc.png", label: "?" },
+            { icon: "https://i.postimg.cc/cL1RRMDy/smp.png", label: "?" },
+            { icon: "https://i.postimg.cc/nLYDjsJS/638965736295609752.png", label: "LT4" },
             { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "?" }
         ]
     },
