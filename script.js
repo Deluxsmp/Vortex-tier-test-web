@@ -16,22 +16,6 @@ const playersData = [
         ]
     },
     {
-        name: "gamexogamer",
-        points: 10,
-        region: "AS",
-        regionFull: "Asia",
-        tiers: [
-            { icon: "https://i.postimg.cc/qM3XBvN6/nethop.png", label: "?" },
-            { icon: "https://i.postimg.cc/xdK4XPqk/axe.png", label: "?" },
-            { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "HT5" },
-            { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "?" },
-            { icon: "https://i.postimg.cc/zD9KQY0P/uhc.png", label: "?" },
-            { icon: "https://i.postimg.cc/cL1RRMDy/smp.png", label: "?" },
-            { icon: "https://i.postimg.cc/nLYDjsJS/638965736295609752.png", label: "?" },
-            { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "?" }
-        ]
-    },
-    {
         name: "AAYANSH123",
         points: 31,
         region: "AS",
@@ -209,11 +193,11 @@ const playersData = [
     },
     {
         name: "siamahmed102",
-        points: 2,
+        points: 25,
         region: "AS",
         regionFull: "Asia",
         tiers: [
-            { icon: "https://i.postimg.cc/qM3XBvN6/nethop.png", label: "?" },
+            { icon: "https://i.postimg.cc/qM3XBvN6/nethop.png", label: "HT4" },
             { icon: "https://i.postimg.cc/xdK4XPqk/axe.png", label: "?" },
             { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "LT5" },
             { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "?" },
@@ -225,13 +209,13 @@ const playersData = [
     },
     {
         name: "SR_Gamerzzz",
-        points: 3,
+        points: 7,
         region: "AS",
         regionFull: "Asia",
         tiers: [
             { icon: "https://i.postimg.cc/qM3XBvN6/nethop.png", label: "?" },
             { icon: "https://i.postimg.cc/xdK4XPqk/axe.png", label: "?" },
-            { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "LT5" },
+            { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "HT5" },
             { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "?" },
             { icon: "https://i.postimg.cc/zD9KQY0P/uhc.png", label: "?" },
             { icon: "https://i.postimg.cc/cL1RRMDy/smp.png", label: "?" },
@@ -401,13 +385,13 @@ const playersData = [
     },
     {
         name: "gamexogamer",
-        points: 24,
+        points: 34,
         region: "AS",
         regionFull: "Asia",
         tiers: [
             { icon: "https://i.postimg.cc/qM3XBvN6/nethop.png", label: "?" },
             { icon: "https://i.postimg.cc/xdK4XPqk/axe.png", label: "?" },
-            { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "?" },
+            { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "HT5" },
             { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "?" },
             { icon: "https://i.postimg.cc/zD9KQY0P/uhc.png", label: "LT4" },
             { icon: "https://i.postimg.cc/cL1RRMDy/smp.png", label: "?" },
@@ -593,7 +577,7 @@ const playersData = [
     },
     {
         name: "StrikeFlax",
-        points: 67,
+        points: 77,
         region: "AS",
         regionFull: "Asia",
         tiers: [
@@ -603,7 +587,7 @@ const playersData = [
             { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "?" },
             { icon: "https://i.postimg.cc/zD9KQY0P/uhc.png", label: "?" },
             { icon: "https://i.postimg.cc/cL1RRMDy/smp.png", label: "?" },
-            { icon: "https://i.postimg.cc/nLYDjsJS/638965736295609752.png", label: "LT4" },
+            { icon: "https://i.postimg.cc/nLYDjsJS/638965736295609752.png", label: "LT3" },
             { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "LT4" }
         ]
     },
