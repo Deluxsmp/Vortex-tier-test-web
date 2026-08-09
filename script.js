@@ -16,6 +16,134 @@ const playersData = [
         ]
     },
     {
+        name: "gamexogamer",
+        points: 10,
+        region: "AS",
+        regionFull: "Asia",
+        tiers: [
+            { icon: "https://i.postimg.cc/qM3XBvN6/nethop.png", label: "?" },
+            { icon: "https://i.postimg.cc/xdK4XPqk/axe.png", label: "?" },
+            { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "HT5" },
+            { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "?" },
+            { icon: "https://i.postimg.cc/zD9KQY0P/uhc.png", label: "?" },
+            { icon: "https://i.postimg.cc/cL1RRMDy/smp.png", label: "?" },
+            { icon: "https://i.postimg.cc/nLYDjsJS/638965736295609752.png", label: "?" },
+            { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "?" }
+        ]
+    },
+    {
+        name: "AAYANSH123",
+        points: 31,
+        region: "AS",
+        regionFull: "Asia",
+        tiers: [
+            { icon: "https://i.postimg.cc/qM3XBvN6/nethop.png", label: "?" },
+            { icon: "https://i.postimg.cc/xdK4XPqk/axe.png", label: "?" },
+            { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "LT4" },
+            { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "HT5" },
+            { icon: "https://i.postimg.cc/zD9KQY0P/uhc.png", label: "?" },
+            { icon: "https://i.postimg.cc/cL1RRMDy/smp.png", label: "?" },
+            { icon: "https://i.postimg.cc/nLYDjsJS/638965736295609752.png", label: "LT5" },
+            { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "?" }
+        ]
+    },
+    {
+        name: "NotSmild",
+        points: 15,
+        region: "AS",
+        regionFull: "Asia",
+        tiers: [
+            { icon: "https://i.postimg.cc/qM3XBvN6/nethop.png", label: "?" },
+            { icon: "https://i.postimg.cc/xdK4XPqk/axe.png", label: "?" },
+            { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "?" },
+            { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "?" },
+            { icon: "https://i.postimg.cc/zD9KQY0P/uhc.png", label: "?" },
+            { icon: "https://i.postimg.cc/cL1RRMDy/smp.png", label: "?" },
+            { icon: "https://i.postimg.cc/nLYDjsJS/638965736295609752.png", label: "?" },
+            { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "HT4" }
+        ]
+    },
+    {
+        name: "NOm4ndXD",
+        points: 14,
+        region: "AS",
+        regionFull: "Asia",
+        tiers: [
+            { icon: "https://i.postimg.cc/qM3XBvN6/nethop.png", label: "?" },
+            { icon: "https://i.postimg.cc/xdK4XPqk/axe.png", label: "?" },
+            { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "?" },
+            { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "?" },
+            { icon: "https://i.postimg.cc/zD9KQY0P/uhc.png", label: "?" },
+            { icon: "https://i.postimg.cc/cL1RRMDy/smp.png", label: "?" },
+            { icon: "https://i.postimg.cc/nLYDjsJS/638965736295609752.png", label: "LT4" },
+            { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "?" }
+        ]
+    },
+    {
+        name: "NIZXASHOK",
+        points: 4,
+        region: "AS",
+        regionFull: "Asia",
+        tiers: [
+            { icon: "https://i.postimg.cc/qM3XBvN6/nethop.png", label: "LT5" },
+            { icon: "https://i.postimg.cc/xdK4XPqk/axe.png", label: "?" },
+            { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "?" },
+            { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "?" },
+            { icon: "https://i.postimg.cc/zD9KQY0P/uhc.png", label: "?" },
+            { icon: "https://i.postimg.cc/cL1RRMDy/smp.png", label: "?" },
+            { icon: "https://i.postimg.cc/nLYDjsJS/638965736295609752.png", label: "?" },
+            { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "?" }
+        ]
+    },
+    {
+        name: "NorzoVempire",
+        points: 15,
+        region: "AS",
+        regionFull: "Asia",
+        tiers: [
+            { icon: "https://i.postimg.cc/qM3XBvN6/nethop.png", label: "HT5" },
+            { icon: "https://i.postimg.cc/xdK4XPqk/axe.png", label: "?" },
+            { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "?" },
+            { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "?" },
+            { icon: "https://i.postimg.cc/zD9KQY0P/uhc.png", label: "?" },
+            { icon: "https://i.postimg.cc/cL1RRMDy/smp.png", label: "?" },
+            { icon: "https://i.postimg.cc/nLYDjsJS/638965736295609752.png", label: "?" },
+            { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "?" }
+        ]
+    },
+    {
+        name: "Villtrum PVP",
+        points: 4,
+        region: "AS",
+        regionFull: "Asia",
+        tiers: [
+            { icon: "https://i.postimg.cc/qM3XBvN6/nethop.png", label: "?" },
+            { icon: "https://i.postimg.cc/xdK4XPqk/axe.png", label: "?" },
+            { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "?" },
+            { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "?" },
+            { icon: "https://i.postimg.cc/zD9KQY0P/uhc.png", label: "?" },
+            { icon: "https://i.postimg.cc/cL1RRMDy/smp.png", label: "?" },
+            { icon: "https://i.postimg.cc/nLYDjsJS/638965736295609752.png", label: "LT5" },
+            { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "?" }
+        ]
+    },
+    {
+        name: "Yash_Rajput",
+        points: 25,
+        region: "AS",
+        regionFull: "Asia",
+        tiers: [
+            { icon: "https://i.postimg.cc/qM3XBvN6/nethop.png", label: "?" },
+            { icon: "https://i.postimg.cc/xdK4XPqk/axe.png", label: "?" },
+            { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "?" },
+            { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "?" },
+            { icon: "https://i.postimg.cc/zD9KQY0P/uhc.png", label: "?" },
+            { icon: "https://i.postimg.cc/cL1RRMDy/smp.png", label: "?" },
+            { icon: "https://i.postimg.cc/nLYDjsJS/638965736295609752.png", label: "HT4" },
+            { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "?" }
+        ]
+    },
+    {
         name: "Itz_Dhrubo",
         points: 1,
         region: "AS",
