@@ -16,6 +16,22 @@ const playersData = [
         ]
     },
     {
+        name: "MR_HITLAR7",
+        points: 7,
+        region: "AS",
+        regionFull: "Asia",
+        tiers: [
+            { icon: "https://i.postimg.cc/qM3XBvN6/nethop.png", label: "?" },
+            { icon: "https://i.postimg.cc/xdK4XPqk/axe.png", label: "?" },
+            { icon: "https://i.postimg.cc/qB8vkfpb/sword.png", label: "?" },
+            { icon: "https://i.postimg.cc/sXG1PvdS/pot.png", label: "?" },
+            { icon: "https://i.postimg.cc/zD9KQY0P/uhc.png", label: "?" },
+            { icon: "https://i.postimg.cc/cL1RRMDy/smp.png", label: "?" },
+            { icon: "https://i.postimg.cc/nLYDjsJS/638965736295609752.png", label: "HT5" },
+            { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "?" }
+        ]
+    },
+    {
         name: "Jihad90",
         points: 10,
         region: "AS",
