@@ -92,8 +92,7 @@ const playersData = [
             { icon: "https://i.postimg.cc/zD9KQY0P/uhc.png", label: "?" },
             { icon: "https://i.postimg.cc/cL1RRMDy/smp.png", label: "?" },
             { icon: "https://i.postimg.cc/nLYDjsJS/638965736295609752.png", label: "?" },
-            { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "LT5
-               " }
+            { icon: "https://i.postimg.cc/3x6kkgVP/mace.png", label: "LT5" },
         ]
     },
     {
