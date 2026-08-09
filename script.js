@@ -49,7 +49,7 @@ const playersData = [
     },
     {
         name: "SR_Gamerzzz",
-        points: 2,
+        points: 3,
         region: "AS",
         regionFull: "Asia",
         tiers: [
@@ -65,7 +65,7 @@ const playersData = [
     },
     {
         name: "ShreddedXD__",
-        points: 3,
+        points: 4,
         region: "AS",
         regionFull: "Asia",
         tiers: [
@@ -81,7 +81,7 @@ const playersData = [
     },
     {
         name: "GodxSpear",
-        points: 4,
+        points: 5,
         region: "AS",
         regionFull: "Aisa",
         tiers: [
