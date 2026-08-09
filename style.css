@@ -77,7 +77,7 @@ p { color: var(--text-muted); max-width: 600px; margin-bottom: 35px; font-size: 
     border: 1px solid var(--border-color);
 }
 .player-row-item td { 
-    padding: 24px 20px; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); 
+    padding: 12px 20px; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); 
     vertical-align: middle; 
 }
 .player-row-item td:first-child { border-left: 1px solid var(--border-color); border-top-left-radius: 10px; border-bottom-left-radius: 10px; }
@@ -101,7 +101,7 @@ p { color: var(--text-muted); max-width: 600px; margin-bottom: 35px; font-size: 
 .player-name { font-weight: 800; color: var(--text-main); font-size: 1.05rem; }
 
 .rank-desc { font-size: 0.78rem; color: #94a3b8; display: flex; align-items: center; gap: 6px; font-weight: 700; }
-.player-skin-full { width: 30px; height: auto; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
+.player-skin-full { height: 48px; width: auto; object-fit: contain; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
 
 .region-badge { 
     padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: 900; border: 1px solid; letter-spacing: 0.8px; display: inline-block;
