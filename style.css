@@ -66,10 +66,10 @@ p { color: var(--text-muted); max-width: 600px; margin-bottom: 35px; font-size: 
 .search-box:focus { border-color: var(--accent-color); }
 
 /* --- Table Design --- */
-.overall-table { width: 100%; border-collapse: separate; border-spacing: 0 4px; white-space: nowrap; }
+.overall-table { width: 100%; border-collapse: separate; border-spacing: 0 8px; white-space: nowrap; }
 .overall-table th { 
     color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; 
-    padding: 0 15px 8px 15px; text-align: left; letter-spacing: 1px; font-weight: 700;
+    padding: 0 15px 12px 15px; text-align: left; letter-spacing: 1px; font-weight: 700;
 }
 
 .player-row-item { 
@@ -77,11 +77,11 @@ p { color: var(--text-muted); max-width: 600px; margin-bottom: 35px; font-size: 
     border: 1px solid var(--border-color);
 }
 .player-row-item td { 
-    padding: 10px 15px; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); 
+    padding: 20px 18px; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); 
     vertical-align: middle; 
 }
-.player-row-item td:first-child { border-left: 1px solid var(--border-color); border-top-left-radius: 6px; border-bottom-left-radius: 6px; }
-.player-row-item td:last-child { border-right: 1px solid var(--border-color); border-top-right-radius: 6px; border-bottom-right-radius: 6px; }
+.player-row-item td:first-child { border-left: 1px solid var(--border-color); border-top-left-radius: 8px; border-bottom-left-radius: 8px; }
+.player-row-item td:last-child { border-right: 1px solid var(--border-color); border-top-right-radius: 8px; border-bottom-right-radius: 8px; }
 .player-row-item:hover { background: var(--card-hover); border-color: #30363d; }
 
 .rank-col { font-weight: 900; font-size: 1.2rem; width: 60px; font-style: italic; color: var(--text-muted); }
