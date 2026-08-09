@@ -16,7 +16,7 @@ const playersData = [
         ]
     },
     {
-        name: "Itz_Dhrubi",
+        name: "Itz_Dhrubo",
         points: 1,
         region: "AS",
         regionFull: "Asia",
