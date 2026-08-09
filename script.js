@@ -599,8 +599,16 @@ function filterPlayers() {
 }
 
 function showWebsite() {
-    document.getElementById('landing-page').style.display = 'none';
-    document.getElementById('main-content').style.display = 'block';
+    let landing = document.getElementById('landing-page');
+    let main = document.getElementById('main-content');
+    
+    // ল্যান্ডিং পেজটিকে পুরোপুরি লুকিয়ে ফেলা
+    landing.style.display = 'none';
+    landing.style.visibility = 'hidden';
+    
+    // মেইন লিডারবোর্ড পেজটি দৃশ্যমান করা
+    main.style.display = 'block';
+    
     renderTable();
 }
 
