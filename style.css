@@ -1,12 +1,12 @@
 :root {
-    --bg-color: #07090e;          /* ডিপ ডার্ক ব্লু-ব্ল্যাক ব্যাকগ্রাউন্ড */
-    --card-bg: #0e121b;           /* ডিপ ডার্ক কার্ড */
-    --card-hover: #161c29;        /* হোভার করলে প্রিমিয়াম শেড */
-    --border-color: #1e2638;      /* স্লিক বর্ডার */
+    --bg-color: #05070b;          /* ডিপ ডার্ক ব্লু-ব্ল্যাক ব্যাকগ্রাউন্ড */
+    --card-bg: #0d1117;           /* ডিপ ডার্ক কার্ড */
+    --card-hover: #161b22;        /* হোভার করলে প্রিমিয়াম শেড */
+    --border-color: #21262d;      /* স্লিক বর্ডার */
     --accent-color: #facc15;      /* গোল্ডেন ইয়োলো (Golden Yellow) */
     --neon-glow: rgba(250, 204, 21, 0.4);
-    --text-main: #fcfcfc;
-    --text-muted: #94a3b8;
+    --text-main: #f0f6fc;
+    --text-muted: #8b949e;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', 'Segoe UI', sans-serif; }
