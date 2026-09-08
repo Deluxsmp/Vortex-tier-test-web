@@ -1,432 +1,381 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Vortex Tier — Admin</title>
 
-  <title>Vortex Tier — Admin</title>
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:#050505;
+  color:#fff;
+  font-family:Inter,Arial,sans-serif;
+}
+.hidden{display:none!important}
+button,input,select{font:inherit}
+button{cursor:pointer}
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+.login-wrap{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.login-box{
+  width:100%;
+  max-width:410px;
+  background:#101010;
+  border:1px solid #292929;
+  border-radius:18px;
+  padding:30px;
+}
+.logo{
+  font-size:28px;
+  font-weight:900;
+}
+.muted{
+  color:#888;
+  font-size:13px;
+}
+.login-box .muted{
+  margin:7px 0 25px;
+}
+label{
+  display:block;
+  color:#aaa;
+  font-size:13px;
+  font-weight:700;
+  margin:0 0 7px;
+}
+input,select{
+  width:100%;
+  background:#080808;
+  color:#fff;
+  border:1px solid #303030;
+  border-radius:10px;
+  padding:12px 13px;
+  outline:none;
+}
+input:focus,select:focus{
+  border-color:#666;
+}
+.btn{
+  border:1px solid #333;
+  background:#181818;
+  color:#fff;
+  padding:11px 15px;
+  border-radius:10px;
+  font-weight:800;
+}
+.btn.primary{
+  background:#fff;
+  color:#000;
+  border-color:#fff;
+}
+.btn.danger{
+  color:#ff6666;
+}
+.login-btn{
+  width:100%;
+  margin-top:14px;
+}
+.error{
+  display:none;
+  color:#ff6868;
+  font-size:13px;
+  margin-top:10px;
+}
 
-    body {
-      margin: 0;
-      font-family: Inter, Arial, sans-serif;
-      background: #050505;
-      color: #fff;
-    }
+.admin{
+  max-width:1200px;
+  margin:auto;
+  padding:25px;
+}
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:22px;
+}
+.topbar h1{
+  margin:0;
+  font-size:28px;
+}
+.card{
+  background:#101010;
+  border:1px solid #282828;
+  border-radius:16px;
+  padding:22px;
+  margin-bottom:20px;
+}
+.card h2{
+  margin:0 0 18px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+.full{
+  grid-column:1/-1;
+}
+.field{
+  margin-bottom:2px;
+}
 
-    .hidden {
-      display: none !important;
-    }
+.mode-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin-top:15px;
+}
+.mode-box{
+  background:#080808;
+  border:1px solid #252525;
+  border-radius:12px;
+  padding:14px;
+}
+.mode-title{
+  font-size:15px;
+  font-weight:900;
+  margin-bottom:11px;
+}
+.mode-box input{
+  margin-top:8px;
+}
 
-    .login-page {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
+.form-buttons{
+  display:flex;
+  gap:9px;
+  margin-top:18px;
+  flex-wrap:wrap;
+}
 
-    .login-box {
-      width: 100%;
-      max-width: 420px;
-      background: #101010;
-      border: 1px solid #292929;
-      border-radius: 18px;
-      padding: 30px;
-      box-shadow: 0 20px 60px rgba(0,0,0,.45);
-    }
+.status{
+  margin-top:12px;
+  font-size:13px;
+  color:#79ff91;
+}
 
-    .logo {
-      font-size: 27px;
-      font-weight: 900;
-      margin-bottom: 6px;
-    }
+.search{
+  margin-bottom:15px;
+}
 
-    .subtitle {
-      color: #888;
-      margin-bottom: 25px;
-      font-size: 14px;
-    }
+.player-list{
+  display:grid;
+  gap:10px;
+}
+.player{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  background:#080808;
+  border:1px solid #252525;
+  border-radius:12px;
+  padding:14px;
+}
+.player-name{
+  font-weight:900;
+}
+.player-meta{
+  color:#888;
+  font-size:12px;
+  margin-top:4px;
+}
+.actions{
+  display:flex;
+  gap:8px;
+}
+.empty{
+  color:#777;
+  padding:15px 0;
+}
 
-    label {
-      display: block;
-      font-size: 13px;
-      font-weight: 700;
-      color: #aaa;
-      margin-bottom: 8px;
-    }
+.download-box{
+  border:1px solid #292929;
+  background:#080808;
+  border-radius:12px;
+  padding:15px;
+  margin-top:20px;
+}
+.download-box p{
+  color:#888;
+  font-size:13px;
+  line-height:1.5;
+  margin:7px 0 14px;
+}
 
-    input,
-    select {
-      width: 100%;
-      padding: 13px 14px;
-      background: #080808;
-      color: #fff;
-      border: 1px solid #303030;
-      border-radius: 10px;
-      outline: none;
-      font-size: 14px;
-    }
-
-    input:focus,
-    select:focus {
-      border-color: #666;
-    }
-
-    button {
-      border: 0;
-      cursor: pointer;
-      color: white;
-      font-weight: 800;
-    }
-
-    .login-btn,
-    .primary-btn {
-      width: 100%;
-      padding: 13px;
-      border-radius: 10px;
-      background: #fff;
-      color: #000;
-      margin-top: 15px;
-    }
-
-    .error {
-      color: #ff6565;
-      font-size: 13px;
-      margin-top: 12px;
-      display: none;
-    }
-
-    /* ADMIN */
-
-    .admin {
-      min-height: 100vh;
-      padding: 25px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      margin-bottom: 25px;
-    }
-
-    .topbar h1 {
-      margin: 0;
-      font-size: 28px;
-    }
-
-    .logout {
-      background: #1a1a1a;
-      border: 1px solid #333;
-      padding: 10px 16px;
-      border-radius: 10px;
-    }
-
-    .card {
-      background: #101010;
-      border: 1px solid #282828;
-      border-radius: 16px;
-      padding: 22px;
-      margin-bottom: 20px;
-    }
-
-    .card h2 {
-      margin: 0 0 18px;
-      font-size: 19px;
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
-    }
-
-    .field {
-      margin-bottom: 5px;
-    }
-
-    .full {
-      grid-column: 1 / -1;
-    }
-
-    .save-btn {
-      background: #fff;
-      color: #000;
-      padding: 12px 18px;
-      border-radius: 10px;
-      margin-top: 10px;
-    }
-
-    .players {
-      display: grid;
-      gap: 10px;
-    }
-
-    .player {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      background: #080808;
-      border: 1px solid #252525;
-      border-radius: 12px;
-      padding: 14px;
-    }
-
-    .player-name {
-      font-weight: 800;
-    }
-
-    .player-meta {
-      color: #888;
-      font-size: 12px;
-      margin-top: 4px;
-    }
-
-    .actions {
-      display: flex;
-      gap: 8px;
-    }
-
-    .edit-btn,
-    .delete-btn {
-      padding: 9px 13px;
-      border-radius: 8px;
-      background: #191919;
-      border: 1px solid #333;
-    }
-
-    .delete-btn {
-      color: #ff6969;
-    }
-
-    .mode-results {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-top: 15px;
-    }
-
-    .mode-box {
-      background: #080808;
-      border: 1px solid #252525;
-      padding: 14px;
-      border-radius: 12px;
-    }
-
-    .mode-title {
-      font-weight: 800;
-      margin-bottom: 10px;
-    }
-
-    .status {
-      margin-top: 12px;
-      font-size: 13px;
-      color: #8cff9a;
-    }
-
-    @media (max-width: 700px) {
-      .admin {
-        padding: 15px;
-      }
-
-      .grid,
-      .mode-results {
-        grid-template-columns: 1fr;
-      }
-
-      .topbar {
-        align-items: flex-start;
-      }
-
-      .player {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .actions {
-        width: 100%;
-      }
-
-      .actions button {
-        flex: 1;
-      }
-    }
-  </style>
+@media(max-width:700px){
+  .admin{padding:15px}
+  .grid,.mode-grid{
+    grid-template-columns:1fr;
+  }
+  .player{
+    align-items:flex-start;
+    flex-direction:column;
+  }
+  .actions{
+    width:100%;
+  }
+  .actions button{
+    flex:1;
+  }
+  .topbar{
+    align-items:flex-start;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- =========================
-       LOGIN
-  ========================== -->
+<!-- =====================================================
+     LOGIN
+====================================================== -->
 
-  <section id="loginPage" class="login-page">
+<section id="loginPage" class="login-wrap">
 
-    <div class="login-box">
+  <div class="login-box">
 
-      <div class="logo">Vortex Tier</div>
-      <div class="subtitle">Administrator Login</div>
+    <div class="logo">Vortex Tier</div>
 
-      <form id="loginForm">
-
-        <label for="password">
-          Admin Password
-        </label>
-
-        <input
-          id="password"
-          type="password"
-          placeholder="Enter admin password"
-          autocomplete="off"
-          required
-        >
-
-        <button
-          type="submit"
-          class="login-btn"
-        >
-          Login
-        </button>
-
-        <div id="loginError" class="error">
-          Incorrect password.
-        </div>
-
-      </form>
-
+    <div class="muted">
+      Administrator Login
     </div>
 
-  </section>
+    <form id="loginForm">
 
+      <label>Admin Password</label>
 
-  <!-- =========================
-       ADMIN PANEL
-  ========================== -->
-
-  <main id="adminPanel" class="admin hidden">
-
-    <div class="topbar">
-
-      <div>
-        <h1>Admin Panel</h1>
-        <div class="subtitle">
-          Vortex Tier Management
-        </div>
-      </div>
-
-      <button
-        id="logoutBtn"
-        class="logout"
+      <input
+        id="passwordInput"
+        type="password"
+        placeholder="Enter password"
+        autocomplete="off"
+        required
       >
-        Logout
+
+      <button class="btn primary login-btn" type="submit">
+        Login
       </button>
 
+      <div id="loginError" class="error">
+        Incorrect password.
+      </div>
+
+    </form>
+
+  </div>
+
+</section>
+
+
+<!-- =====================================================
+     ADMIN PANEL
+====================================================== -->
+
+<main id="adminPanel" class="admin hidden">
+
+  <div class="topbar">
+
+    <div>
+      <h1>Admin Panel</h1>
+      <div class="muted">
+        Vortex Tier Management
+      </div>
     </div>
 
+    <button id="logoutBtn" class="btn">
+      Logout
+    </button>
 
-    <!-- ADD / EDIT PLAYER -->
-
-    <section class="card">
-
-      <h2 id="formTitle">
-        Add Player
-      </h2>
-
-      <form id="playerForm">
-
-        <input
-          type="hidden"
-          id="editIndex"
-          value=""
-        >
-
-        <div class="grid">
-
-          <div class="field">
-
-            <label>
-              Player Name
-            </label>
-
-            <input
-              id="playerName"
-              type="text"
-              placeholder="Minecraft username"
-              required
-            >
-
-          </div>
+  </div>
 
 
-          <div class="field">
+  <!-- ===================================================
+       ADD / EDIT PLAYER
+  ==================================================== -->
 
-            <label>
-              Region
-            </label>
+  <section class="card">
 
-            <input
-              id="playerRegion"
-              type="text"
-              placeholder="e.g. AS"
-            >
+    <h2 id="formTitle">
+      Add Player
+    </h2>
 
-          </div>
+    <form id="playerForm">
 
+      <input
+        type="hidden"
+        id="editIndex"
+        value=""
+      >
 
-          <div class="field">
+      <div class="grid">
 
-            <label>
-              Skin URL (optional)
-            </label>
+        <div class="field">
+          <label>Player Name</label>
 
-            <input
-              id="playerSkin"
-              type="text"
-              placeholder="https://..."
-            >
-
-          </div>
-
-
-          <div class="field">
-
-            <label>
-              NameMC URL (optional)
-            </label>
-
-            <input
-              id="playerNamemc"
-              type="text"
-              placeholder="https://namemc.com/..."
-            >
-
-          </div>
-
+          <input
+            id="playerName"
+            type="text"
+            placeholder="Minecraft username"
+            required
+          >
         </div>
 
 
-        <h3 style="margin-top:25px;">
-          Gamemode Results
-        </h3>
+        <div class="field">
+          <label>Region</label>
 
-        <div
-          id="modeResults"
-          class="mode-results"
-        ></div>
+          <input
+            id="playerRegion"
+            type="text"
+            placeholder="e.g. AS"
+          >
+        </div>
 
+
+        <div class="field">
+          <label>Skin URL</label>
+
+          <input
+            id="playerSkin"
+            type="text"
+            placeholder="Optional skin image URL"
+          >
+        </div>
+
+
+        <div class="field">
+          <label>NameMC URL</label>
+
+          <input
+            id="playerNamemc"
+            type="text"
+            placeholder="Optional NameMC URL"
+          >
+        </div>
+
+      </div>
+
+
+      <h3 style="margin-top:25px">
+        Gamemode Results
+      </h3>
+
+      <div id="modeGrid" class="mode-grid"></div>
+
+
+      <div class="form-buttons">
 
         <button
           type="submit"
-          class="save-btn"
+          class="btn primary"
         >
           Save Player
         </button>
@@ -434,129 +383,174 @@
         <button
           type="button"
           id="cancelEdit"
-          class="save-btn hidden"
-          style="background:#191919;color:#fff;margin-left:8px;"
+          class="btn hidden"
         >
           Cancel Edit
         </button>
 
+      </div>
 
-        <div
-          id="saveStatus"
-          class="status"
-        ></div>
+      <div id="saveStatus" class="status"></div>
 
-      </form>
-
-    </section>
+    </form>
 
 
-    <!-- PLAYERS -->
+    <!-- DOWNLOAD APP.JS -->
 
-    <section class="card">
+    <div class="download-box">
 
-      <h2>
-        Players
-      </h2>
+      <strong>
+        Update Rankings Website
+      </strong>
 
-      <div
-        id="playersList"
-        class="players"
-      ></div>
+      <p>
+        After adding or editing players, download the
+        updated <b>app.js</b> and replace the old
+        app.js on your website.
+      </p>
 
-    </section>
+      <button
+        id="downloadAppBtn"
+        class="btn primary"
+      >
+        Download Updated app.js
+      </button>
 
-  </main>
+    </div>
+
+  </section>
+
+
+  <!-- ===================================================
+       PLAYER SEARCH / LIST
+  ==================================================== -->
+
+  <section class="card">
+
+    <h2>
+      Players
+    </h2>
+
+    <input
+      id="playerSearch"
+      class="search"
+      type="search"
+      placeholder="Search player name..."
+      autocomplete="off"
+    >
+
+    <div
+      id="playerList"
+      class="player-list"
+    ></div>
+
+  </section>
+
+</main>
 
 
 <script>
 
-/* =========================================================
-   ADMIN PASSWORD
-   Change this password to your own password.
-   ========================================================= */
+/* =====================================================
+   CONFIG
+====================================================== */
 
-const ADMIN_PASSWORD = "vortexadmin1";
+/*
+  CHANGE THIS TO YOUR ADMIN PASSWORD
+*/
+const ADMIN_PASSWORD = "vortexadmin123";
 
 
-/* =========================================================
+/* =====================================================
    MODES
-   ========================================================= */
+====================================================== */
 
 const MODES = [
-  {
-    id: "vanilla",
-    name: "Vanilla"
-  },
-  {
-    id: "uhc",
-    name: "UHC"
-  },
-  {
-    id: "pot",
-    name: "Pot"
-  },
-  {
-    id: "nethop",
-    name: "NetHop"
-  },
-  {
-    id: "smp",
-    name: "SMP"
-  },
-  {
-    id: "sword",
-    name: "Sword"
-  },
-  {
-    id: "axe",
-    name: "Axe"
-  },
-  {
-    id: "mace",
-    name: "Mace"
-  }
+  { id:"vanilla", name:"Vanilla" },
+  { id:"uhc",     name:"UHC" },
+  { id:"pot",     name:"Pot" },
+  { id:"nethop",  name:"NetHop" },
+  { id:"smp",     name:"SMP" },
+  { id:"sword",   name:"Sword" },
+  { id:"axe",     name:"Axe" },
+  { id:"mace",    name:"Mace" }
 ];
 
 
-/* =========================================================
+/* =====================================================
    ELEMENTS
-   ========================================================= */
+====================================================== */
 
-const loginPage = document.getElementById("loginPage");
-const adminPanel = document.getElementById("adminPanel");
+const loginPage =
+  document.getElementById("loginPage");
 
-const loginForm = document.getElementById("loginForm");
-const passwordInput = document.getElementById("password");
-const loginError = document.getElementById("loginError");
+const adminPanel =
+  document.getElementById("adminPanel");
 
-const logoutBtn = document.getElementById("logoutBtn");
+const loginForm =
+  document.getElementById("loginForm");
 
-const playerForm = document.getElementById("playerForm");
-const playersList = document.getElementById("playersList");
+const passwordInput =
+  document.getElementById("passwordInput");
 
-const modeResults = document.getElementById("modeResults");
+const loginError =
+  document.getElementById("loginError");
 
-const formTitle = document.getElementById("formTitle");
-const editIndex = document.getElementById("editIndex");
+const logoutBtn =
+  document.getElementById("logoutBtn");
 
-const playerName = document.getElementById("playerName");
-const playerRegion = document.getElementById("playerRegion");
-const playerSkin = document.getElementById("playerSkin");
-const playerNamemc = document.getElementById("playerNamemc");
+const playerForm =
+  document.getElementById("playerForm");
 
-const cancelEdit = document.getElementById("cancelEdit");
-const saveStatus = document.getElementById("saveStatus");
+const playerList =
+  document.getElementById("playerList");
+
+const playerSearch =
+  document.getElementById("playerSearch");
+
+const modeGrid =
+  document.getElementById("modeGrid");
+
+const formTitle =
+  document.getElementById("formTitle");
+
+const editIndex =
+  document.getElementById("editIndex");
+
+const playerName =
+  document.getElementById("playerName");
+
+const playerRegion =
+  document.getElementById("playerRegion");
+
+const playerSkin =
+  document.getElementById("playerSkin");
+
+const playerNamemc =
+  document.getElementById("playerNamemc");
+
+const cancelEdit =
+  document.getElementById("cancelEdit");
+
+const saveStatus =
+  document.getElementById("saveStatus");
+
+const downloadAppBtn =
+  document.getElementById("downloadAppBtn");
 
 
-/* =========================================================
-   IMPORTANT:
-   NO SESSION STORAGE.
-   NO LOCAL LOGIN MEMORY.
-   
-   Every time admin.html loads,
-   login screen is shown.
-   ========================================================= */
+/* =====================================================
+   LOGIN
+====================================================== */
+
+/*
+  IMPORTANT:
+  We DO NOT use sessionStorage/localStorage
+  for login.
+
+  Therefore every time admin.html is opened,
+  password will be required again.
+*/
 
 function showLogin(){
 
@@ -580,17 +574,11 @@ function showAdmin(){
 }
 
 
-/* =========================================================
-   LOGIN
-   ========================================================= */
-
 loginForm.addEventListener("submit", function(e){
 
   e.preventDefault();
 
-  const password = passwordInput.value;
-
-  if(password === ADMIN_PASSWORD){
+  if(passwordInput.value === ADMIN_PASSWORD){
 
     loginError.style.display = "none";
 
@@ -609,10 +597,6 @@ loginForm.addEventListener("submit", function(e){
 });
 
 
-/* =========================================================
-   LOGOUT
-   ========================================================= */
-
 logoutBtn.addEventListener("click", function(){
 
   showLogin();
@@ -620,42 +604,47 @@ logoutBtn.addEventListener("click", function(){
 });
 
 
-/* =========================================================
-   MODE INPUTS
-   ========================================================= */
+/* =====================================================
+   MODE FORM
+====================================================== */
 
 function createModeInputs(){
 
-  modeResults.innerHTML = MODES.map(mode => {
+  modeGrid.innerHTML = MODES.map(mode => {
 
     return `
       <div class="mode-box">
 
         <div class="mode-title">
-          ${mode.name}
+          ${escapeHTML(mode.name)}
         </div>
 
-        <label>
-          Tier
-        </label>
+        <label>Tier</label>
 
-        <select
-          data-tier="${mode.id}"
-        >
-          <option value="">Untested</option>
+        <select data-tier="${mode.id}">
+
+          <option value="">
+            Untested
+          </option>
+
           <option value="HT1">HT1</option>
           <option value="LT1">LT1</option>
+
           <option value="HT2">HT2</option>
           <option value="LT2">LT2</option>
+
           <option value="HT3">HT3</option>
           <option value="LT3">LT3</option>
+
           <option value="HT4">HT4</option>
           <option value="LT4">LT4</option>
+
           <option value="HT5">HT5</option>
           <option value="LT5">LT5</option>
+
         </select>
 
-        <label style="margin-top:10px;">
+        <label style="margin-top:10px">
           Points
         </label>
 
@@ -663,8 +652,8 @@ function createModeInputs(){
           type="number"
           min="0"
           step="1"
-          data-points="${mode.id}"
           placeholder="0"
+          data-points="${mode.id}"
         >
 
       </div>
@@ -675,9 +664,9 @@ function createModeInputs(){
 }
 
 
-/* =========================================================
-   DATA
-   ========================================================= */
+/* =====================================================
+   DATA STORAGE
+====================================================== */
 
 function getPlayers(){
 
@@ -687,7 +676,7 @@ function getPlayers(){
       localStorage.getItem("vortexPlayers") || "[]"
     );
 
-  }catch{
+  }catch(error){
 
     return [];
 
@@ -706,9 +695,9 @@ function savePlayers(players){
 }
 
 
-/* =========================================================
-   ADD PLAYER
-   ========================================================= */
+/* =====================================================
+   SAVE PLAYER
+====================================================== */
 
 playerForm.addEventListener("submit", function(e){
 
@@ -716,12 +705,17 @@ playerForm.addEventListener("submit", function(e){
 
   const players = getPlayers();
 
-  const name = playerName.value.trim();
+  const name =
+    playerName.value.trim();
 
   if(!name){
     return;
   }
 
+
+  /*
+    Create gamemode results
+  */
 
   const results = {};
 
@@ -737,7 +731,8 @@ playerForm.addEventListener("submit", function(e){
         `[data-points="${mode.id}"]`
       );
 
-    const tier = tierElement.value;
+    const tier =
+      tierElement.value;
 
     const points =
       Number(pointsElement.value || 0);
@@ -753,7 +748,7 @@ playerForm.addEventListener("submit", function(e){
 
   const player = {
 
-    name: name,
+    name:name,
 
     region:
       playerRegion.value.trim(),
@@ -764,13 +759,16 @@ playerForm.addEventListener("submit", function(e){
     namemc:
       playerNamemc.value.trim(),
 
-    results: results
+    results:results
 
   };
 
 
-  const index = editIndex.value;
+  const index =
+    editIndex.value;
 
+
+  /* EDIT */
 
   if(index !== ""){
 
@@ -779,9 +777,41 @@ playerForm.addEventListener("submit", function(e){
     saveStatus.textContent =
       "Player updated successfully.";
 
-  }else{
+  }
+
+  /* ADD */
+
+  else{
+
+    /*
+      Prevent duplicate player names.
+    */
+
+    const exists =
+      players.some(
+        (p,i) =>
+          i !== Number(index) &&
+          String(p.name).toLowerCase() ===
+          name.toLowerCase()
+      );
+
+    if(exists){
+
+      saveStatus.style.color =
+        "#ff6868";
+
+      saveStatus.textContent =
+        "This player already exists.";
+
+      return;
+
+    }
+
 
     players.push(player);
+
+    saveStatus.style.color =
+      "#79ff91";
 
     saveStatus.textContent =
       "Player added successfully.";
@@ -798,19 +828,57 @@ playerForm.addEventListener("submit", function(e){
 });
 
 
-/* =========================================================
-   RENDER PLAYERS
-   ========================================================= */
+/* =====================================================
+   SEARCH
+====================================================== */
+
+playerSearch.addEventListener(
+  "input",
+  renderPlayers
+);
+
+
+/* =====================================================
+   RENDER PLAYER LIST
+====================================================== */
 
 function renderPlayers(){
 
-  const players = getPlayers();
+  const players =
+    getPlayers();
 
-  if(players.length === 0){
+  const search =
+    playerSearch.value
+      .trim()
+      .toLowerCase();
 
-    playersList.innerHTML = `
-      <div style="color:#777;">
-        No players added yet.
+
+  const filtered =
+    players
+      .map((player,index) => ({
+        player,
+        index
+      }))
+      .filter(item => {
+
+        if(!search){
+          return true;
+        }
+
+        return String(
+          item.player.name || ""
+        )
+        .toLowerCase()
+        .includes(search);
+
+      });
+
+
+  if(filtered.length === 0){
+
+    playerList.innerHTML = `
+      <div class="empty">
+        No players found.
       </div>
     `;
 
@@ -819,8 +887,15 @@ function renderPlayers(){
   }
 
 
-  playersList.innerHTML =
-    players.map((player, index) => {
+  playerList.innerHTML =
+    filtered.map(item => {
+
+      const player =
+        item.player;
+
+      const index =
+        item.index;
+
 
       return `
 
@@ -833,7 +908,9 @@ function renderPlayers(){
             </div>
 
             <div class="player-meta">
-              ${escapeHTML(player.region || "No region")}
+              ${escapeHTML(
+                player.region || "No region"
+              )}
             </div>
 
           </div>
@@ -841,14 +918,14 @@ function renderPlayers(){
           <div class="actions">
 
             <button
-              class="edit-btn"
+              class="btn"
               onclick="editPlayer(${index})"
             >
               Edit
             </button>
 
             <button
-              class="delete-btn"
+              class="btn danger"
               onclick="deletePlayer(${index})"
             >
               Delete
@@ -865,22 +942,25 @@ function renderPlayers(){
 }
 
 
-/* =========================================================
+/* =====================================================
    EDIT PLAYER
-   ========================================================= */
+====================================================== */
 
 window.editPlayer = function(index){
 
-  const players = getPlayers();
+  const players =
+    getPlayers();
 
-  const player = players[index];
+  const player =
+    players[index];
 
   if(!player){
     return;
   }
 
 
-  editIndex.value = index;
+  editIndex.value =
+    index;
 
   playerName.value =
     player.name || "";
@@ -900,6 +980,7 @@ window.editPlayer = function(index){
     const result =
       player.results?.[mode.id] || {};
 
+
     const tierElement =
       document.querySelector(
         `[data-tier="${mode.id}"]`
@@ -915,7 +996,7 @@ window.editPlayer = function(index){
       result.tier || "";
 
     pointsElement.value =
-      result.points || "";
+      result.points ?? "";
 
   });
 
@@ -923,43 +1004,48 @@ window.editPlayer = function(index){
   formTitle.textContent =
     "Edit Player";
 
-  cancelEdit.classList.remove("hidden");
+  cancelEdit.classList.remove(
+    "hidden"
+  );
 
   saveStatus.textContent = "";
 
   window.scrollTo({
-    top: 0,
-    behavior: "smooth"
+    top:0,
+    behavior:"smooth"
   });
 
 };
 
 
-/* =========================================================
+/* =====================================================
    DELETE PLAYER
-   ========================================================= */
+====================================================== */
 
 window.deletePlayer = function(index){
 
-  const players = getPlayers();
+  const players =
+    getPlayers();
 
-  if(!players[index]){
+  const player =
+    players[index];
+
+  if(!player){
     return;
   }
 
 
-  const playerNameConfirm =
-    players[index].name;
+  const ok =
+    confirm(
+      `Delete ${player.name}?`
+    );
 
-
-  if(!confirm(
-    `Delete ${playerNameConfirm}?`
-  )){
+  if(!ok){
     return;
   }
 
 
-  players.splice(index, 1);
+  players.splice(index,1);
 
   savePlayers(players);
 
@@ -968,20 +1054,15 @@ window.deletePlayer = function(index){
 };
 
 
-/* =========================================================
+/* =====================================================
    CANCEL EDIT
-   ========================================================= */
+====================================================== */
 
-cancelEdit.addEventListener("click", function(){
+cancelEdit.addEventListener(
+  "click",
+  resetForm
+);
 
-  resetForm();
-
-});
-
-
-/* =========================================================
-   RESET FORM
-   ========================================================= */
 
 function resetForm(){
 
@@ -992,37 +1073,129 @@ function resetForm(){
   formTitle.textContent =
     "Add Player";
 
-  cancelEdit.classList.add("hidden");
+  cancelEdit.classList.add(
+    "hidden"
+  );
 
 }
 
 
-/* =========================================================
-   HTML ESCAPE
-   ========================================================= */
+/* =====================================================
+   DOWNLOAD UPDATED APP.JS
+====================================================== */
+
+/*
+  This creates a new app.js containing all
+  current player data.
+
+  Replace your old app.js with the downloaded file.
+*/
+
+downloadAppBtn.addEventListener(
+  "click",
+  downloadApp
+);
+
+
+function downloadApp(){
+
+  const players =
+    getPlayers();
+
+
+  /*
+    Keep the player data inside VORTEX_DATA.
+    Your existing frontend can read this data.
+  */
+
+  const appCode = `/* =====================================================
+   VORTEX TIER — GENERATED APP.JS
+   Generated from Admin Panel
+====================================================== */
+
+const VORTEX_DATA = ${JSON.stringify(
+  {
+    players:players
+  },
+  null,
+  2
+)};
+
+/*
+  The player database above was generated by
+  Vortex Tier Admin Panel.
+
+  IMPORTANT:
+  Keep your existing Vortex frontend rendering
+  functions below this data section.
+*/
+`;
+
+
+  const blob =
+    new Blob(
+      [appCode],
+      {
+        type:"application/javascript"
+      }
+    );
+
+
+  const url =
+    URL.createObjectURL(blob);
+
+
+  const a =
+    document.createElement("a");
+
+  a.href = url;
+
+  a.download =
+    "app.js";
+
+  document.body.appendChild(a);
+
+  a.click();
+
+  a.remove();
+
+  URL.revokeObjectURL(url);
+
+
+  saveStatus.style.color =
+    "#79ff91";
+
+  saveStatus.textContent =
+    "Updated app.js downloaded.";
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+====================================================== */
 
 function escapeHTML(value){
 
-  return String(value || "")
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
 }
 
 
-/* =========================================================
-   START
-   ========================================================= */
+/* =====================================================
+   INITIALIZE
+====================================================== */
 
 createModeInputs();
 
 /*
-  VERY IMPORTANT:
-  Never automatically open admin panel.
-  Always show password screen when the page loads.
+  ALWAYS SHOW LOGIN.
+  No saved login session.
 */
 
 showLogin();
