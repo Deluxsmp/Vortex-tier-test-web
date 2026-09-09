@@ -6,6 +6,49 @@
 
 const VORTEX_PLAYERS = [
   {
+    "id": 1788921344307,
+    "name": "Itz_Dhrubo",
+    "region": "AS",
+    "skinUrl": "",
+    "namemc": "",
+    "results": {
+      "vanilla": {
+        "tier": "HT5",
+        "points": 20
+      },
+      "uhc": {
+        "tier": "",
+        "points": ""
+      },
+      "pot": {
+        "tier": "",
+        "points": ""
+      },
+      "nethop": {
+        "tier": "",
+        "points": ""
+      },
+      "smp": {
+        "tier": "",
+        "points": ""
+      },
+      "sword": {
+        "tier": "",
+        "points": ""
+      },
+      "axe": {
+        "tier": "",
+        "points": ""
+      },
+      "mace": {
+        "tier": "",
+        "points": ""
+      }
+    },
+    "totalPoints": 20,
+    "position": 1
+  },
+  {
     "id": 1788921161748,
     "name": "Se9ku",
     "region": "AS",
@@ -46,6 +89,6 @@ const VORTEX_PLAYERS = [
       }
     },
     "totalPoints": 5,
-    "position": 1
+    "position": 2
   }
 ];
