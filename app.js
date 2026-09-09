@@ -11,7 +11,7 @@ const VORTEX_DATA={
     {"id":"mace","n":"Mace","i":"🔨"}
   ],
   "icons":{},
-  "site":{"siteName":"Vortex Tier","discordUrl":"https://discord.com","serverIp":"mc.vortextier.net"},
+  "site":{"siteName":"Vortex Tier","discordUrl":"https://discord.com","serverIp":"join our discord"},
   "players":(typeof VORTEX_PLAYERS!=='undefined'?VORTEX_PLAYERS:[])
 };
 let DATA=VORTEX_DATA;
