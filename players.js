@@ -1,0 +1,2 @@
+/* VORTEX TIER — PLAYER DATA ONLY */
+const VORTEX_PLAYERS = [];
