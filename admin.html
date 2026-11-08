@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Vortex Tier — Admin Panel</title>
+<title>MCRANCKED — Admin Panel</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -15,7 +15,7 @@
 
 <div id="loginScreen" class="wrap login">
   <div class="card">
-    <h1>Vortex Tier</h1>
+    <h1>MCRANCKED</h1>
     <p>Admin Panel</p>
     <div class="field">
       <label>Password</label>
@@ -30,7 +30,7 @@
   <div class="card">
     <div class="topbar">
       <div>
-        <h1>Vortex Tier Admin Panel</h1>
+        <h1>MCRANCKED Admin Panel</h1>
         <p style="margin:0">Manage players, ranks and points.</p>
       </div>
       <button class="btn" onclick="logout()">Logout</button>
@@ -61,7 +61,7 @@
 
   <div class="card">
     <div class="topbar">
-      <div><h2>Players</h2><p style="margin:0">Live player data from Firebase. Changes are saved instantly and appear on the public Rankings page.</p></div>
+      <div><h2>Players</h2><p style="margin:0">Existing player data loaded from players.js/local storage.</p></div>
       <div id="count" class="status">0 players</div>
     </div>
     <input id="search" class="input" style="margin-top:15px" placeholder="Search player..." oninput="renderPlayers()">
@@ -69,117 +69,190 @@
   </div>
 
   <div class="card">
-    <h2>Live Database</h2>
-    <p class="hint">Player changes are saved directly to Firebase. You no longer need to download or replace <b>players.js</b>. Keep the old file only as a fallback.</p>
-    <div id="dbStatus" class="status">Connecting to Firebase…</div>
+    <h2>Download Player Data</h2>
+    <p class="hint">This button downloads <b>players.js only</b>. It NEVER downloads or changes app.js. Replace your website’s old players.js with this downloaded file.</p>
+    <button class="btn primary" onclick="downloadPlayersJS()">⬇ Download players.js</button>
     <div id="downloadMsg" class="msg"></div>
   </div>
 </div>
 
 <script src="players.js"></script>
-<script type="module">
-import { playersRef, doc, getDocs, setDoc, deleteDoc, onSnapshot } from "./firebase.js";
+<script>
+/* =========================
+   MCRANCKED ADMIN CONFIG
+========================= */
+const ADMIN_PASSWORD = "mcranked@admin1";
 
-const ADMIN_PASSWORD = "vortexadmin1";
 const MODES = [
-  {id:'vanilla', name:'Vanilla'}, {id:'uhc', name:'UHC'}, {id:'pot', name:'Pot'},
-  {id:'nethop', name:'NetHop'}, {id:'smp', name:'SMP'}, {id:'sword', name:'Sword'},
-  {id:'axe', name:'Axe'}, {id:'mace', name:'Mace'}
+  {id:'vanilla', name:'Vanilla'},
+  {id:'uhc', name:'UHC'},
+  {id:'pot', name:'Pot'},
+  {id:'nethop', name:'NetHop'},
+  {id:'smp', name:'SMP'},
+  {id:'sword', name:'Sword'},
+  {id:'axe', name:'Axe'},
+  {id:'mace', name:'Mace'}
 ];
-const TIERS = ['', 'HT1','LT1','HT2','LT2','HT3','LT3','HT4','LT4','HT5','LT5'];
-let players=[];
-let dbLoaded=false;
 
-function safeJSON(value){try{return JSON.parse(value)}catch{return []}}
-function saveLocal(){localStorage.setItem('vortexAdminPlayers',JSON.stringify(players))}
-function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
-function id(){return Date.now()+Math.floor(Math.random()*100000)}
+const TIERS = ['', 'HT1','LT1','HT2','LT2','HT3','LT3','HT4','LT4','HT5','LT5'];
+
+function safeJSON(value){
+  try{return JSON.parse(value)}catch{return []}
+}
+
+// Start with a clean player database. Old admin/localStorage player data is intentionally cleared.
+localStorage.removeItem('vortexAdminPlayers');
+let players = [];
+
+function saveLocal(){
+  localStorage.setItem('vortexAdminPlayers',JSON.stringify(players));
+}
 
 function login(){
   if(document.getElementById('password').value===ADMIN_PASSWORD){
     document.getElementById('loginScreen').classList.add('hidden');
     document.getElementById('adminScreen').classList.remove('hidden');
-    startLiveDatabase();
-  } else document.getElementById('loginMsg').textContent='Incorrect password.';
+    renderPlayers();
+  }else document.getElementById('loginMsg').textContent='Incorrect password.';
 }
-window.login=login;
-function logout(){document.getElementById('adminScreen').classList.add('hidden');document.getElementById('loginScreen').classList.remove('hidden');document.getElementById('password').value=''}
-window.logout=logout;
+function logout(){
+  document.getElementById('adminScreen').classList.add('hidden');
+  document.getElementById('loginScreen').classList.remove('hidden');
+  document.getElementById('password').value='';
+}
+
 document.getElementById('password').addEventListener('keydown',e=>{if(e.key==='Enter')login()});
+
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]))}
+function id(){return Date.now()+Math.floor(Math.random()*100000)}
+function pointsValue(v){return v===''||v===null||v===undefined?'':Number(v)}
 
 function buildModeFields(player={}){
   document.getElementById('modeFields').innerHTML=MODES.map(m=>{
-    const r=player.results?.[m.id]||{}; const selected=r.tier||'';
-    const pts=selected&&r.points!==''&&r.points!==undefined&&r.points!==null?r.points:'';
-    return `<div class="modebox"><h3>${m.name}</h3><div class="row">
-      <select id="tier_${m.id}" class="select" onchange="tierChanged('${m.id}')"><option value="">Not Tested</option>
-      ${TIERS.filter(Boolean).map(t=>`<option value="${t}" ${selected===t?'selected':''}>${t}</option>`).join('')}</select>
-      <input id="points_${m.id}" class="input" type="number" min="0" step="1" placeholder="Points" value="${esc(pts)}">
-    </div><label class="check"><input id="auto_${m.id}" type="checkbox"> Keep points empty when Not Tested</label></div>`;
+    const r=player.results?.[m.id]||{};
+    const selected=r.tier||'';
+    const pts=(selected && r.points!=='' && r.points!==undefined && r.points!==null)?r.points:'';
+    return `<div class="modebox">
+      <h3>${m.name}</h3>
+      <div class="row">
+        <select id="tier_${m.id}" class="select" onchange="tierChanged('${m.id}')">
+          <option value="">Not Tested</option>
+          ${TIERS.filter(Boolean).map(t=>`<option value="${t}" ${selected===t?'selected':''}>${t}</option>`).join('')}
+        </select>
+        <input id="points_${m.id}" class="input" type="number" min="0" step="1" placeholder="Points" value="${esc(pts)}">
+      </div>
+      <label class="check"><input id="auto_${m.id}" type="checkbox"> Keep points empty when Not Tested</label>
+    </div>`;
   }).join('');
 }
-window.buildModeFields=buildModeFields;
-function tierChanged(mode){const tier=document.getElementById('tier_'+mode).value;if(!tier)document.getElementById('points_'+mode).value=''}
-window.tierChanged=tierChanged;
+
+function tierChanged(mode){
+  const tier=document.getElementById('tier_'+mode).value;
+  const points=document.getElementById('points_'+mode);
+  if(!tier) points.value='';
+}
 
 function getFormPlayer(){
   const results={};
-  MODES.forEach(m=>{const tier=document.getElementById('tier_'+m.id).value;const pv=document.getElementById('points_'+m.id).value.trim();results[m.id]={tier,points:tier&&pv!==''?Number(pv):''}});
-  return {id:document.getElementById('editId').value?Number(document.getElementById('editId').value):id(),name:document.getElementById('name').value.trim(),region:document.getElementById('region').value,skinUrl:document.getElementById('skin').value.trim(),namemc:document.getElementById('namemc').value.trim(),results};
-}
-function calculate(){players.forEach(p=>{let total=0;MODES.forEach(m=>{const r=p.results?.[m.id];if(r&&r.points!==''&&r.points!==null&&r.points!==undefined&&!Number.isNaN(Number(r.points)))total+=Number(r.points)});p.totalPoints=total});players.sort((a,b)=>(b.totalPoints||0)-(a.totalPoints||0));players.forEach((p,i)=>p.position=i+1)}
-
-async function startLiveDatabase(){
-  document.getElementById('dbStatus').textContent='Connecting to Firebase…';
-  onSnapshot(playersRef, async snap=>{
-    if(snap.empty){
-      const local=safeJSON(localStorage.getItem('vortexAdminPlayers'));
-      const source=Array.isArray(local)&&local.length?local:(typeof VORTEX_PLAYERS!=='undefined'?VORTEX_PLAYERS:[]);
-      if(source.length){
-        calculateFrom(source);
-        for(const p of players) await setDoc(doc(playersRef,String(p.id)),p);
-        document.getElementById('dbStatus').textContent='Connected • Initial player data uploaded to Firebase.';
-        return;
-      }
-    }
-    players=snap.docs.map(d=>d.data()); calculate(); saveLocal(); dbLoaded=true; renderPlayers();
-    document.getElementById('dbStatus').textContent='● Live database connected';
-  },err=>{
-    console.error(err); document.getElementById('dbStatus').textContent='Firebase error: '+err.message;
-    players=safeJSON(localStorage.getItem('vortexAdminPlayers'));
-    if(!players.length&&typeof VORTEX_PLAYERS!=='undefined')players=structuredClone(VORTEX_PLAYERS);
-    calculate(); renderPlayers();
+  MODES.forEach(m=>{
+    const tier=document.getElementById('tier_'+m.id).value;
+    const pv=document.getElementById('points_'+m.id).value.trim();
+    results[m.id]={tier:tier,points:tier&&pv!==''?Number(pv):''};
   });
+  return {
+    id:document.getElementById('editId').value?Number(document.getElementById('editId').value):id(),
+    name:document.getElementById('name').value.trim(),
+    region:document.getElementById('region').value,
+    skinUrl:document.getElementById('skin').value.trim(),
+    namemc:document.getElementById('namemc').value.trim(),
+    results
+  };
 }
-function calculateFrom(arr){players=structuredClone(arr);calculate()}
 
-async function savePlayer(){
+function calculate(){
+  players.forEach(p=>{
+    let total=0;
+    MODES.forEach(m=>{
+      const r=p.results?.[m.id];
+      if(r && r.points!=='' && r.points!==null && r.points!==undefined && !Number.isNaN(Number(r.points))) total+=Number(r.points);
+    });
+    p.totalPoints=total;
+  });
+  players.sort((a,b)=>(b.totalPoints||0)-(a.totalPoints||0));
+  players.forEach((p,i)=>p.position=i+1);
+}
+
+function savePlayer(){
   const p=getFormPlayer();
   if(!p.name){document.getElementById('saveMsg').textContent='Player name is required.';return}
-  try{
-    const same=players.find(x=>x.name.toLowerCase()===p.name.toLowerCase());
-    if(same&&same.id!==p.id)p.id=same.id;
-    const editing=players.findIndex(x=>x.id===p.id);
-    if(editing!==-1)players[editing]=p;else players.push(p);
-    calculate();
-    const saved=players.find(x=>x.id===p.id);
-    await setDoc(doc(playersRef,String(saved.id)),saved);
-    saveLocal(); clearForm(); renderPlayers();
-    document.getElementById('saveMsg').textContent='✓ Saved to Firebase. Rankings updated automatically.';
-  }catch(err){console.error(err);document.getElementById('saveMsg').textContent='Save failed: '+err.message}
+
+  const same=players.findIndex(x=>x.name.toLowerCase()===p.name.toLowerCase());
+  const editing=players.findIndex(x=>x.id===p.id);
+
+  if(same!==-1 && same!==editing){
+    p.id=players[same].id;
+    players[same]=p;
+  }else if(editing!==-1){
+    players[editing]=p;
+  }else players.push(p);
+
+  calculate();
+  saveLocal();
+  document.getElementById('saveMsg').textContent='Player saved. Download players.js when ready.';
+  clearForm();
+  renderPlayers();
 }
-window.savePlayer=savePlayer;
 
-function editPlayer(pid){const p=players.find(x=>x.id===pid);if(!p)return;document.getElementById('editId').value=p.id;document.getElementById('name').value=p.name||'';document.getElementById('region').value=p.region||'AS';document.getElementById('skin').value=p.skinUrl||'';document.getElementById('namemc').value=p.namemc||'';buildModeFields(p);document.getElementById('formTitle').textContent='Edit Player';scrollTo({top:0,behavior:'smooth'})}
-window.editPlayer=editPlayer;
+function editPlayer(pid){
+  const p=players.find(x=>x.id===pid);if(!p)return;
+  document.getElementById('editId').value=p.id;
+  document.getElementById('name').value=p.name||'';
+  document.getElementById('region').value=p.region||'AS';
+  document.getElementById('skin').value=p.skinUrl||'';
+  document.getElementById('namemc').value=p.namemc||'';
+  buildModeFields(p);
+  document.getElementById('formTitle').textContent='Edit Player';
+  scrollTo({top:0,behavior:'smooth'});
+}
 
-async function deletePlayer(pid){const p=players.find(x=>x.id===pid);if(!p||!confirm('Delete '+p.name+'?'))return;try{await deleteDoc(doc(playersRef,String(pid)));players=players.filter(x=>x.id!==pid);calculate();saveLocal();renderPlayers();document.getElementById('saveMsg').textContent='✓ Player deleted from Firebase.'}catch(err){document.getElementById('saveMsg').textContent='Delete failed: '+err.message}}
-window.deletePlayer=deletePlayer;
+function deletePlayer(pid){
+  const p=players.find(x=>x.id===pid);if(!p)return;
+  if(!confirm('Delete '+p.name+'?'))return;
+  players=players.filter(x=>x.id!==pid);
+  calculate();saveLocal();renderPlayers();
+}
 
-function clearForm(){document.getElementById('editId').value='';document.getElementById('name').value='';document.getElementById('region').value='AS';document.getElementById('skin').value='';document.getElementById('namemc').value='';buildModeFields();document.getElementById('formTitle').textContent='Add Player'}
-window.clearForm=clearForm;
-function renderPlayers(){const q=(document.getElementById('search').value||'').toLowerCase().trim();const list=players.filter(p=>p.name.toLowerCase().includes(q));document.getElementById('count').textContent=players.length+' player'+(players.length===1?'':'s');document.getElementById('playerList').innerHTML=list.length?list.map(p=>`<div class="player"><div><div class="playername">#${p.position||'-'} ${esc(p.name)}</div><div class="meta">${esc(p.region||'')} • ${p.totalPoints||0} points</div></div><div class="actions"><button class="btn" onclick="editPlayer(${p.id})">Edit</button><button class="btn red" onclick="deletePlayer(${p.id})">Delete</button></div></div>`).join(''):'<p style="color:#777">No players found.</p>'}
-window.renderPlayers=renderPlayers;
+function clearForm(){
+  document.getElementById('editId').value='';
+  document.getElementById('name').value='';
+  document.getElementById('region').value='AS';
+  document.getElementById('skin').value='';
+  document.getElementById('namemc').value='';
+  buildModeFields();
+  document.getElementById('formTitle').textContent='Add Player';
+}
+
+function renderPlayers(){
+  calculate();
+  const q=document.getElementById('search').value.toLowerCase().trim();
+  const list=players.filter(p=>p.name.toLowerCase().includes(q));
+  document.getElementById('count').textContent=players.length+' player'+(players.length===1?'':'s');
+  document.getElementById('playerList').innerHTML=list.length?list.map(p=>`<div class="player">
+    <div><div class="playername">#${p.position||'-'} ${esc(p.name)}</div><div class="meta">${esc(p.region||'')} • ${p.totalPoints||0} points</div></div>
+    <div class="actions"><button class="btn" onclick="editPlayer(${p.id})">Edit</button><button class="btn red" onclick="deletePlayer(${p.id})">Delete</button></div>
+  </div>`).join(''):'<p style="color:#777">No players found.</p>';
+}
+
+function downloadPlayersJS(){
+  calculate();saveLocal();
+  const output = `/* =====================================================\n   MCRANCKED — PLAYER DATA\n   Generated from Admin Panel\n   Replace ONLY your old players.js with this file.\n====================================================== */\n\nconst MCRANCKED_PLAYERS = ${JSON.stringify(players,null,2)};\n`;
+  const blob=new Blob([output],{type:'application/javascript;charset=utf-8'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');a.href=url;a.download='players.js';document.body.appendChild(a);a.click();a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+  document.getElementById('downloadMsg').textContent='players.js downloaded. Replace only players.js on your website.';
+}
+
 buildModeFields();
 </script>
 </body>

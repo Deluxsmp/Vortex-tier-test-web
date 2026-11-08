@@ -1,5 +1,4 @@
-import { playersRef, onSnapshot } from "./firebase.js";
-const VORTEX_DATA={
+const MCRANCKED_DATA={
   "modes":[
     {"id":"overall","n":"Overall","i":"🏆"},
     {"id":"vanilla","n":"Vanilla","i":"🟪"},
@@ -12,24 +11,12 @@ const VORTEX_DATA={
     {"id":"mace","n":"Mace","i":"🔨"}
   ],
   "icons":{},
-  "site":{"siteName":"Vortex Tier","discordUrl":"https://discord.com","serverIp":"join our discord"},
-  "players":(typeof VORTEX_PLAYERS!=='undefined'?VORTEX_PLAYERS:[])
+  "site":{"siteName":"MCRANCKED","discordUrl":"https://discord.com","serverIp":"join our discord"},
+  "players":(typeof MCRANCKED_PLAYERS!=='undefined'?MCRANCKED_PLAYERS:[])
 };
-let DATA={...VORTEX_DATA,players:[]};
-let firebaseReady=false;
-
-// Live player data: any Admin Panel change is reflected here automatically.
-onSnapshot(playersRef, snap=>{
-  DATA.players=snap.docs.map(d=>d.data());
-  firebaseReady=true;
-  renderModes();
-  render();
-}, err=>{
-  console.error('Firebase player listener failed:', err);
-  if(!firebaseReady){ DATA.players=VORTEX_DATA.players; renderModes(); render(); }
-});
+let DATA=MCRANCKED_DATA;
 // Icons are configured once in icons.js and reused everywhere.
-DATA.icons={...DATA.icons,...(typeof VORTEX_ICONS!=='undefined'?VORTEX_ICONS:{})};
+DATA.icons={...DATA.icons,...(typeof MCRANCKED_ICONS!=='undefined'?MCRANCKED_ICONS:{})};
 let active='overall';
 const modesEl=document.getElementById('modes'),boardEl=document.getElementById('leaderboard'),search=document.getElementById('search');
 const modal=document.getElementById('modal'),modalBody=document.getElementById('playerModalBody');

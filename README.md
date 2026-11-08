@@ -1,4 +1,4 @@
-# Vortex Tier
+# MCRANCKED
 
 Static Minecraft PvP tier-list website.
 
@@ -21,3 +21,7 @@ Static Minecraft PvP tier-list website.
 7. Do not replace `app.js`.
 
 Overall points and positions are calculated automatically from the tested gamemode points.
+
+
+## Custom Logo
+Open `site-config.js` and replace `PASTE_YOUR_TIERLIST_LOGO_LINK_HERE` with your tier-list logo's direct image URL. No other code needs to be changed.
